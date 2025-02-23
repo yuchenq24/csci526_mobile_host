@@ -1,0 +1,79 @@
+{
+    "Sequence_Main": {
+        "ID": "Sequence_Main",
+        "CardDatas": [
+            {
+                "ID": "Card_01",
+                "Level": 1
+            },
+            {
+                "ID": "Card_Empty",
+                "Level": 1
+            },
+            {
+                "ID": "Card_01",
+                "Level": 1
+            },
+            {
+                "ID": "Card_Empty",
+                "Level": 1
+            },
+            {
+                "ID": "Card_Async",
+                "Level": 2,
+                "LinkedSequenceID": "Sequence_Async_1"
+            },
+            {
+                "ID": "Card_Empty",
+                "Level": 1
+            },
+            {
+                "ID": "Card_01",
+                "Level": 1
+            },
+            {
+                "ID": "Card_Empty",
+                "Level": 1
+            },
+            {
+                "ID": "Card_Empty",
+                "Level": 1
+            },
+            {
+                "ID": "Card_Empty",
+                "Level": 1
+            }
+        ]
+    },
+    "Sequence_Async_1": {
+        "ID": "Sequence_Async_1",
+        "CardDatas": [
+            {
+                "ID": "Card_Async2",
+                "Level": 1
+            },
+            {
+                "ID": "Card_Async",
+                "Level": 1,
+                "LinkedSequenceID": "Sequence_Async_2"
+            },
+            {
+                "ID": "Card_01",
+                "Level": 1
+            }
+        ]
+    },
+    "Sequence_Async_2": {
+        "ID": "Sequence_Async_2",
+        "CardDatas": [
+            {
+                "ID": "Card_Async2",
+                "Level": 1
+            },
+            {
+                "ID": "Card_01",
+                "Level": 1
+            }
+        ]
+    }
+}
