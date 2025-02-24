@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SequenceView : MonoBehaviour
 {
     //Thinking: No card views? Yes, we do.
-    public SequenceData sequenceData;
+    //public SequenceData sequenceData;
     public RectTransform selfRectTransform;
     public RectTransform backgroundRectTransform;
     public List<SlotView> slots;
@@ -17,7 +17,7 @@ public class SequenceView : MonoBehaviour
 
     public void Init(Vector2 localAnchorPosition, SequenceData sequenceData)
     {
-        this.sequenceData = sequenceData;
+        //this.sequenceData = sequenceData;
 
         //Init position
         backgroundRectTransform.anchoredPosition = localAnchorPosition;
@@ -30,14 +30,14 @@ public class SequenceView : MonoBehaviour
         {
             var slot = Instantiate(slotPrefab, slotContainer).GetComponent<SlotView>();
             slots.Add(slot);
-            slot.Init();
+            slot.Init(this);
             var data = sequenceData.CardDatas[i];
             if (data.CardID != "Card_Empty")
             {
                 var cardView = Instantiate(cardPrefab, slot.transform).GetComponent<CardView>();
                 cardView.Init(slot, GameDataManager.CardData[data.CardID], data, this, null);
                 cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);
-                slot.Init(cardView);
+                slot.Init(this, cardView);
             }
             
             if (data.LinkedSequenceID != null)
@@ -49,15 +49,8 @@ public class SequenceView : MonoBehaviour
     }
     public void RemoveCardView(CardView cardView)
     {
-        foreach (var data in sequenceData.CardDatas)
-        {
-            if (data.ID == cardView.cardRankData.ID)
-            {
-                data.CardID = "Card_Empty";
-                data.Level = 1;
-                data.LinkedSequenceID = null;
-            }
-        }
+        cardView.slot.content = null;
+        cardView.slot = null;
     }
 
     public void AddCardView(CardView cardView, SlotView slotView)
@@ -66,6 +59,5 @@ public class SequenceView : MonoBehaviour
         slotView.content = cardView;
         cardView.transform.SetParent(slotView.transform);
         cardView.rectTransform.anchoredPosition = Vector2.zero;
-        //cardView.sequenceView = this;
     }
 }

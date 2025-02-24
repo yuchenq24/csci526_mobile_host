@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class InventoryView : MonoBehaviour
 {
-    //Thinking: no card views?
-    public InventoryData inventoryData;
+    //Thinking: no card views? Yes! We do!
+    //public InventoryData inventoryData;
     public RectTransform inventoryRectTransform;
     public GridLayoutGroup gridLayoutGroup;
 
     public Transform cardContainer;
     public GameObject cardPrefab;
+
+    public List<CardView> cardViews = new List<CardView>();
     public void Init()
     {
         //Init position and size
@@ -20,7 +22,7 @@ public class InventoryView : MonoBehaviour
 
         gridLayoutGroup.cellSize = Vector2.one * GameDataManager.CardConfig.CardSize;
 
-        inventoryData = GameDataManager.InventoryData;
+        var inventoryData = GameDataManager.InventoryData;
         for (int i = 0; i < inventoryData.CardDatas.Count; i++)
         {
             var data = inventoryData.CardDatas[i];
@@ -29,17 +31,17 @@ public class InventoryView : MonoBehaviour
                 var cardView = Instantiate(cardPrefab, cardContainer).GetComponent<CardView>();
                 cardView.Init(null, GameDataManager.CardData[data.CardID], data, null, this);
                 cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);
+                cardViews.Add(cardView);
             }
         }
     }
     public void RemoveCardView(CardView cardView)
     {
-        inventoryData.CardDatas.RemoveAll(a => a.ID == cardView.cardRankData.ID);
+        cardViews.Remove(cardView);
     }
     public void AddCardView(CardView cardView)
     {
         cardView.transform.SetParent(inventoryRectTransform);
-        //cardView.inventoryView = this;
-        inventoryData.CardDatas.Add(cardView.cardRankData);
+        cardViews.Add(cardView);
     }
 }

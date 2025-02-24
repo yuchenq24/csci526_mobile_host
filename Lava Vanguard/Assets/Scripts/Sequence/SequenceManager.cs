@@ -9,6 +9,7 @@ public class SequenceManager : MonoBehaviour
     public GameObject sequencePrefab;
     public List<SequenceView> sequenceViews = new List<SequenceView>();
     public SequenceView MainSequence { get => sequenceViews[0]; }
+    public Dictionary<string, SequenceData> savedData = new Dictionary<string, SequenceData>();
     private void Awake()
     {
         Instance = this;
@@ -23,5 +24,16 @@ public class SequenceManager : MonoBehaviour
         var sequenceView = Instantiate(sequencePrefab, sequenceContainer).GetComponent<SequenceView>();
         sequenceView.Init(localAnchorPosition, sequenceData);
         sequenceViews.Add(sequenceView);
+    }
+    public void SaveSequenceData(string sequenceID)
+    {
+        SequenceData sequenceData = new SequenceData();
+        sequenceData.ID = sequenceID;
+        savedData.Add(sequenceID, new SequenceData());
+
+    }
+    public void Reorder()
+    {
+        savedData.Clear();
     }
 }
