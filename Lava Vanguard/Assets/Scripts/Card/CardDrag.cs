@@ -39,12 +39,12 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             //cardView.inventoryView.RemoveCardView(cardView);
             //cardView.inventoryView = null;
+            InventoryManager.Instance.inventoryView.RemoveCardView(cardView);
         }
         else
         {
             //cardView.sequenceView.RemoveCardView(cardView);
-            cardView.slot.content = null;
-            cardView.slot = null;
+            cardView.slot.sequenceView.RemoveCardView(cardView);
             //cardView.sequenceView = null;
         }
     }

@@ -10,19 +10,19 @@ public struct CardSpriteData
     public string Content { get; set; }
     public bool Draggable { get; set; }
 }
-public class CardRankData
+public struct CardRankData
 {
     public string ID { get; set; }
     public string CardID { get; set; }
     public int Level { get; set; }
     public string LinkedSequenceID { get; set; }
 }
-public class SequenceData
+public struct SequenceData
 {
     public string ID { get; set; }
     public List<CardRankData> CardDatas { get; set; }
 }
-public class InventoryData
+public struct InventoryData
 {
     public List<CardRankData> CardDatas { get; set; }
 }

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class SlotView : MonoBehaviour
 {
+    public SequenceView sequenceView;
     public CardView content;
     public RectTransform rectTransform;
-    public void Init(CardView content = null)
+    public void Init(SequenceView sequenceView,CardView content = null)
     {
+        this.sequenceView = sequenceView;
         this.content = content;
         rectTransform = GetComponent<RectTransform>();
         rectTransform.sizeDelta = Vector2.one * GameDataManager.CardConfig.CardSize;
