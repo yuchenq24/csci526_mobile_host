@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using UnityEngine.UIElements;
+using System.IO;
 
 public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance {  get; private set; }
-    public static Dictionary<string, CardModel> CardData;
-    public static Dictionary<string, SequenceModel> SequenceData;
+    public static Dictionary<string, CardSpriteData> CardData;
+    public static Dictionary<string, SequenceData> SequenceData;
+    public static InventoryData InventoryData;
     public static Dictionary<string, Sprite> BackgroundSprite;
     public static Dictionary<string, Sprite> OutlineSprite;
     public static Dictionary<string, Sprite> ContentSprite;
-
-   
+    public static CardConfig CardConfig;
+    public static InventoryConfig InventoryConfig;
     private void Awake()
     {
         if (Instance != null)
@@ -26,11 +28,29 @@ public class GameDataManager : MonoBehaviour
     }
     private void Start()
     {
-        CardData = LoadJson<CardModel>("Json/CardData");
-        SequenceData = LoadJson<SequenceModel>("Json/SequenceData");
+        LoadData();
         LoadSprites();
+        LoadConfigs();
     }
-    private static Dictionary<string, T> LoadJson<T>(string path) where T : struct
+    private static T LoadJson<T>(string path) 
+    {
+        var jsonText = Resources.Load<TextAsset>(path);
+        if (jsonText == null)
+        {
+            Debug.LogError("No JSON file found at path: " + path);
+            return default;
+        }
+        try
+        {
+            return JsonConvert.DeserializeObject<T>(jsonText.text);
+        }
+        catch (JsonException ex)
+        {
+            Debug.LogError("Error parsing JSON: " + ex.Message);
+            return default;
+        }
+    }
+    private static Dictionary<string, T> LoadDictionaryJson<T>(string path)
     {
         var jsonText = Resources.Load<TextAsset>(path);
         if (jsonText == null)
@@ -48,6 +68,15 @@ public class GameDataManager : MonoBehaviour
             return default;
         }
     }
+    private static void SaveData()
+    {
+    }
+    private static void LoadData()
+    {
+        CardData = LoadDictionaryJson<CardSpriteData>("Json/CardData");
+        SequenceData = LoadDictionaryJson<SequenceData>("Json/SequenceData");
+        InventoryData = LoadJson<InventoryData>("Json/InventoryData");
+    }
     private static void LoadSprites()
     {
         BackgroundSprite = new Dictionary<string, Sprite>();
@@ -62,6 +91,11 @@ public class GameDataManager : MonoBehaviour
             if (!ContentSprite.ContainsKey(c.Value.Content))
                 ContentSprite.Add(c.Value.Content, Resources.Load<Sprite>("Sprite/Content/" + c.Value.Content));
         }
+    }
+    private static void LoadConfigs()
+    {
+        CardConfig = Resources.Load<CardConfig>("Config/CardConfig");
+        InventoryConfig = Resources.Load<InventoryConfig>("Config/InventoryConfig");
     }
 
 }

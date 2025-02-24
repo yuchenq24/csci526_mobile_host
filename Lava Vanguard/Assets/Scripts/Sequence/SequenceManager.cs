@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//Just for temp testing
-public class GameManager : MonoBehaviour
+
+public class SequenceManager : MonoBehaviour
 {
+    public static SequenceManager Instance { get; private set; }
     public Transform sequenceContainer;
     public GameObject sequencePrefab;
     public List<SequenceView> sequenceViews = new List<SequenceView>();
-    public static GameManager Instance { get; private set; }
+    public SequenceView MainSequence { get => sequenceViews[0]; }
     private void Awake()
     {
-        Instance = this; 
+        Instance = this;
     }
-    private void Start()
+    public void Init()
     {
         GenerateSequence(Vector2.zero, "Sequence_Main");
     }

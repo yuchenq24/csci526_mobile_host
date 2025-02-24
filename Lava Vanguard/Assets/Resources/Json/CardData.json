@@ -3,24 +3,28 @@
         "ID": "Card_Async",
         "Background": "Background_Normal",
         "Outline": "Outline_Normal",
-        "Content": "Content_Async"
+        "Content": "Content_Async",
+        "Draggable": true
     },
     "Card_Async2": {
         "ID": "Card_Async2",
         "Background": "Background_Normal",
         "Outline": "Outline_Normal",
-        "Content": "Content_Async2"
+        "Content": "Content_Async2",
+        "Draggable": false
     },
     "Card_Empty": {
         "ID": "Card_Empty",
         "Background": "Background_Normal",
         "Outline": "Outline_Empty",
-        "Content": "Content_Empty"
+        "Content": "Content_Empty",
+        "Draggable": false
     },
     "Card_01": {
         "ID": "Card_01",
         "Background": "Background_Normal",
         "Outline": "Outline_Normal",
-        "Content": "Content_01"
+        "Content": "Content_01",
+        "Draggable": true
     }
 }

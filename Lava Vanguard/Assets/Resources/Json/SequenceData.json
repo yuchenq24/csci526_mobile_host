@@ -1,77 +1,92 @@
 {
     "Sequence_Main": {
-        "ID": "Sequence_Main",
+        "CardID": "Sequence_Main",
         "CardDatas": [
             {
-                "ID": "Card_01",
+                "ID": 0,
+                "CardID": "Card_01",
                 "Level": 1
             },
             {
-                "ID": "Card_Empty",
+                "ID": 1,
+                "CardID": "Card_Empty",
                 "Level": 1
             },
             {
-                "ID": "Card_01",
+                "ID": 2,
+                "CardID": "Card_01",
                 "Level": 1
             },
             {
-                "ID": "Card_Empty",
+                "ID": 3,
+                "CardID": "Card_Empty",
                 "Level": 1
             },
             {
-                "ID": "Card_Async",
+                "ID": 4,
+                "CardID": "Card_Async",
                 "Level": 2,
                 "LinkedSequenceID": "Sequence_Async_1"
             },
             {
-                "ID": "Card_Empty",
+                "ID": 5,
+                "CardID": "Card_Empty",
                 "Level": 1
             },
             {
-                "ID": "Card_01",
+                "ID": 6,
+                "CardID": "Card_01",
                 "Level": 1
             },
             {
-                "ID": "Card_Empty",
+                "ID": 7,
+                "CardID": "Card_Empty",
                 "Level": 1
             },
             {
-                "ID": "Card_Empty",
+                "ID": 8,
+                "CardID": "Card_Empty",
                 "Level": 1
             },
             {
-                "ID": "Card_Empty",
+                "ID": 9,
+                "CardID": "Card_Empty",
                 "Level": 1
             }
         ]
     },
     "Sequence_Async_1": {
-        "ID": "Sequence_Async_1",
+        "CardID": "Sequence_Async_1",
         "CardDatas": [
             {
-                "ID": "Card_Async2",
+                "ID": 0,
+                "CardID": "Card_Async2",
                 "Level": 1
             },
             {
-                "ID": "Card_Async",
+                "ID": 1,
+                "CardID": "Card_Async",
                 "Level": 1,
                 "LinkedSequenceID": "Sequence_Async_2"
             },
             {
-                "ID": "Card_01",
+                "ID": 2,
+                "CardID": "Card_01",
                 "Level": 1
             }
         ]
     },
     "Sequence_Async_2": {
-        "ID": "Sequence_Async_2",
+        "CardID": "Sequence_Async_2",
         "CardDatas": [
             {
-                "ID": "Card_Async2",
+                "ID": 0,
+                "CardID": "Card_Async2",
                 "Level": 1
             },
             {
-                "ID": "Card_01",
+                "ID": 1,
+                "CardID": "Card_01",
                 "Level": 1
             }
         ]

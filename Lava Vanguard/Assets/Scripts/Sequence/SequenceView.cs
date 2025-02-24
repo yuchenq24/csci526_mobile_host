@@ -1,33 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SequenceView : MonoBehaviour
 {
-    public SequenceModel sequenceModel;
-    public RectTransform rectTransform;
-    public Transform cardContainer;
-    public GameObject cardPrefab;
+    //Thinking: No card views? Yes, we do.
+    public SequenceData sequenceData;
+    public RectTransform selfRectTransform;
+    public RectTransform backgroundRectTransform;
+    public List<SlotView> slots;
 
-    public void Init(Vector2 localAnchorPosition, SequenceModel sequenceModel)
+    public Transform slotContainer;
+    public GameObject cardPrefab;
+    public GameObject slotPrefab;
+
+    public void Init(Vector2 localAnchorPosition, SequenceData sequenceData)
     {
-        rectTransform = GetComponent<RectTransform>();
-        this.sequenceModel = sequenceModel;
+        this.sequenceData = sequenceData;
 
         //Init position
-        rectTransform.anchoredPosition = localAnchorPosition;
-        for (int i=0;i<sequenceModel.CardDatas.Count;i++) 
+        backgroundRectTransform.anchoredPosition = localAnchorPosition;
+
+        //Init size
+        selfRectTransform.sizeDelta = new Vector2(GameDataManager.CardConfig.MainLength, GameDataManager.CardConfig.MainHeight);
+        backgroundRectTransform.sizeDelta = new Vector2(backgroundRectTransform.sizeDelta.x, GameDataManager.CardConfig.MainHeight);
+
+        for (int i = 0; i < sequenceData.CardDatas.Count; i++) 
         {
-            var cardModel = sequenceModel.CardDatas[i];
-            var cardView = Instantiate(cardPrefab, cardContainer).GetComponent<CardView>();
-            cardView.Init(GameDataManager.CardData[cardModel.ID]);
-            if (cardModel.LinkedSequenceID != null)
+            var slot = Instantiate(slotPrefab, slotContainer).GetComponent<SlotView>();
+            slots.Add(slot);
+            slot.Init();
+            var data = sequenceData.CardDatas[i];
+            if (data.CardID != "Card_Empty")
             {
-                //TODO: Not hardcode
-                localAnchorPosition.x += i * 120;
-                localAnchorPosition.y -= 160;
-                GameManager.Instance.GenerateSequence(localAnchorPosition, cardModel.LinkedSequenceID);
+                var cardView = Instantiate(cardPrefab, slot.transform).GetComponent<CardView>();
+                cardView.Init(slot, GameDataManager.CardData[data.CardID], data, this, null);
+                cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);
+                slot.Init(cardView);
+            }
+            
+            if (data.LinkedSequenceID != null)
+            {
+                localAnchorPosition.x += i * GameDataManager.CardConfig.CardSize;
+                SequenceManager.Instance.GenerateSequence(localAnchorPosition, data.LinkedSequenceID);
             }
         }
+    }
+    public void RemoveCardView(CardView cardView)
+    {
+        foreach (var data in sequenceData.CardDatas)
+        {
+            if (data.ID == cardView.cardRankData.ID)
+            {
+                data.CardID = "Card_Empty";
+                data.Level = 1;
+                data.LinkedSequenceID = null;
+            }
+        }
+    }
+
+    public void AddCardView(CardView cardView, SlotView slotView)
+    {
+        cardView.slot = slotView;
+        slotView.content = cardView;
+        cardView.transform.SetParent(slotView.transform);
+        cardView.rectTransform.anchoredPosition = Vector2.zero;
+        //cardView.sequenceView = this;
     }
 }
