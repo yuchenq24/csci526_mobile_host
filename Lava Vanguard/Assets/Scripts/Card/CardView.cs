@@ -11,20 +11,16 @@ public class CardView : MonoBehaviour
 
     public SlotView slot;
 
-    public InventoryView inventoryView;
-    public SequenceView sequenceView;
 
     public RectTransform rectTransform;
     public Image background;
     public Image outline;
     public Image content;
-    public void Init(SlotView slot, CardSpriteData cardSpriteData, CardRankData cardRankData, SequenceView sequenceView = null, InventoryView inventoryView = null)//Consider using inheritance and other data like atk.
+    public void Init(SlotView slot, CardSpriteData cardSpriteData, CardRankData cardRankData)//Consider using inheritance and other data like atk.
     {
         this.slot = slot;
         this.cardSpriteData = cardSpriteData;
         this.cardRankData = cardRankData;
-        this.sequenceView = sequenceView;
-        this.inventoryView = inventoryView;
 
         //Init size
         rectTransform = GetComponent<RectTransform>();

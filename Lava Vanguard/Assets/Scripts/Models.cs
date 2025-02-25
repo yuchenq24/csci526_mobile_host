@@ -16,6 +16,18 @@ public struct CardRankData
     public string CardID { get; set; }
     public int Level { get; set; }
     public string LinkedSequenceID { get; set; }
+    public CardRankData(string ID, string CardID, int Level) : this()
+    {
+        this.ID = ID;
+        this.CardID = CardID;
+        this.Level = Level;
+    }
+    public static CardRankData AsyncHead { get =>
+            new CardRankData(ID: "0", CardID: "Card_Async2", Level: 1);
+    }
+    public static CardRankData Empty { get =>
+            new CardRankData(ID: "0", CardID: "Card_Empty", Level: 1);
+    }
 }
 public struct SequenceData
 {

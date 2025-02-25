@@ -29,7 +29,7 @@ public class InventoryView : MonoBehaviour
             if (data.CardID != "Card_Empty")
             {
                 var cardView = Instantiate(cardPrefab, cardContainer).GetComponent<CardView>();
-                cardView.Init(null, GameDataManager.CardData[data.CardID], data, null, this);
+                cardView.Init(null, GameDataManager.CardData[data.CardID], data);
                 cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);
                 cardViews.Add(cardView);
             }

@@ -35,21 +35,22 @@ public class SequenceView : MonoBehaviour
             if (data.CardID != "Card_Empty")
             {
                 var cardView = Instantiate(cardPrefab, slot.transform).GetComponent<CardView>();
-                cardView.Init(slot, GameDataManager.CardData[data.CardID], data, this, null);
+                cardView.Init(slot, GameDataManager.CardData[data.CardID], data);
                 cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);
                 slot.Init(this, cardView);
             }
             
             if (data.LinkedSequenceID != null)
             {
-                localAnchorPosition.x += i * GameDataManager.CardConfig.CardSize;
-                SequenceManager.Instance.GenerateSequence(localAnchorPosition, data.LinkedSequenceID);
+               
+                SequenceManager.Instance.GenerateSequence(localAnchorPosition + new  Vector2 (i * GameDataManager.CardConfig.CardSize,0), data.LinkedSequenceID);
             }
         }
     }
     public void RemoveCardView(CardView cardView)
     {
-        cardView.slot.content = null;
+        if (cardView.slot!= null)
+            cardView.slot.content = null;
         cardView.slot = null;
     }
 
@@ -60,4 +61,5 @@ public class SequenceView : MonoBehaviour
         cardView.transform.SetParent(slotView.transform);
         cardView.rectTransform.anchoredPosition = Vector2.zero;
     }
+    
 }

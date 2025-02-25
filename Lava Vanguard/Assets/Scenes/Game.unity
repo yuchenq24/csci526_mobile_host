@@ -491,6 +491,7 @@ MonoBehaviour:
   gridLayoutGroup: {fileID: 1024003040}
   cardContainer: {fileID: 1024003039}
   cardPrefab: {fileID: 3373597543558504571, guid: 77230c972b440ff49a62f58d6f38c86b, type: 3}
+  cardViews: []
 --- !u!1 &1238125554
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +601,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sequenceContainer: {fileID: 2103703561}
   sequencePrefab: {fileID: 4784711730394558846, guid: 7695276cc64de5c4f884413b34a8597e, type: 3}
-  sequenceViews: []
 --- !u!1 &1834797791
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2103703562

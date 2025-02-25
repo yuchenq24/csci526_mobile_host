@@ -24,8 +24,9 @@
             },
             {
                 "ID": 4,
-                "CardID": "Card_Empty",
-                "Level": 2
+                "CardID": "Card_Async",
+                "Level": 3,
+                "LinkedSequenceID": "Sequence_Async_1"
             },
             {
                 "ID": 5,
@@ -50,6 +51,42 @@
             {
                 "ID": 9,
                 "CardID": "Card_Empty",
+                "Level": 1
+            }
+        ]
+    },
+    "Sequence_Async_1": {
+        "CardID": "Sequence_Async_1",
+        "CardDatas": [
+            {
+                "ID": 0,
+                "CardID": "Card_Async2",
+                "Level": 1
+            },
+            {
+                "ID": 1,
+                "CardID": "Card_Async",
+                "Level": 2,
+                "LinkedSequenceID": "Sequence_Async_2"
+            },
+            {
+                "ID": 2,
+                "CardID": "Card_01",
+                "Level": 1
+            }
+        ]
+    },
+    "Sequence_Async_2": {
+        "CardID": "Sequence_Async_2",
+        "CardDatas": [
+            {
+                "ID": 0,
+                "CardID": "Card_Async2",
+                "Level": 1
+            },
+            {
+                "ID": 1,
+                "CardID": "Card_01",
                 "Level": 1
             }
         ]
