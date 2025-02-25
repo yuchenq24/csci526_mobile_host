@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public float speed=5f;
-    public float jumpForce=5f;
-    public float jumpAirTime=0.3f;
-    public float jumpAirForce=5f;
-
-    private Rigidbody2D rb;
-    private bool isGrounded=false;
-    private bool isJumping=false;
-    private float jumpTempTime=0.0f;
+    public PlayerView playerView;
+    public static PlayerManager Instance{get; private set;}
+    void Awake(){
+        Instance=this;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        rb=GetComponent<Rigidbody2D>();
+        playerView.Init();
     }
 
     // Update is called once per frame
@@ -27,41 +23,25 @@ public class PlayerManager : MonoBehaviour
 
     void Move(){
         if(Input.GetKey(KeyCode.A)){
-            rb.velocity=new Vector2(-speed,rb.velocity.y);
-            if(transform.localScale.x>0){
-                transform.localScale=new Vector3(-transform.localScale.x,transform.localScale.y,transform.localScale.z);
-            }
+            playerView.MoveLeft();
         }
         else if(Input.GetKey(KeyCode.D)){
-            rb.velocity=new Vector2(speed,rb.velocity.y);
-            if(transform.localScale.x<0){
-                transform.localScale=new Vector3(-transform.localScale.x,transform.localScale.y,transform.localScale.z);
-            }
+            playerView.MoveRight();
         }
         else{
-            rb.velocity=new Vector2(0,rb.velocity.y);
+            playerView.MoveStop();
         }
     }
 
     void Jump(){
-        if(Input.GetKeyDown(KeyCode.K) && isGrounded){
-            isJumping=true;
-            jumpTempTime=jumpAirTime;
-            rb.velocity=new Vector2(rb.velocity.x,jumpForce);
-            isGrounded=false;
+        if(Input.GetKeyDown(KeyCode.K)){
+            playerView.JumpStart();
         }
-        if(Input.GetKey(KeyCode.K)&&isJumping&&jumpTempTime>0){
-            rb.velocity=new Vector2(rb.velocity.x,jumpAirForce);
-            jumpTempTime-=Time.deltaTime;
+        else if(Input.GetKey(KeyCode.K)){
+            playerView.JumpMaintain();
         }
-        if(Input.GetKeyUp(KeyCode.K)){
-            isJumping=false;
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D collision){
-        if(collision.gameObject.CompareTag("Ground")){
-            isGrounded=true;
+        else if(Input.GetKeyUp(KeyCode.K)){
+            playerView.JumpStop();
         }
     }
     /*

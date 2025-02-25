@@ -420,12 +420,12 @@ MonoBehaviour:
   playerPrefab: {fileID: 0}
   maxAttempts: 2
   cameraDistance: 5
-  minX: -15
-  maxX: 15
+  minX: -10
+  maxX: 10
   minDisX: 3
   maxDisX: 3
-  minDisY: 0.5
-  maxDisY: 1.7
+  minDisY: 1.2
+  maxDisY: 2.7
 --- !u!4 &990588613
 Transform:
   m_ObjectHideFlags: 0
