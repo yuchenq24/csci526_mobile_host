@@ -6,16 +6,18 @@ public class LevelGenerator : MonoBehaviour
 {
     public GameObject groundPrefab;
     public GameObject playerPrefab;
-    public int maxAttempts=2;
     public float cameraDistance=5.0f;
-    public float minX=-20f,maxX=20f;
-    public float minDisX = 5.0f,maxDisX=5.0f;
-    public float minDisY=0.5f,maxDisY=1.7f;
+    public float yGap=2.0f;
     private float lastY;
+    private int groundType=0;
+    private int typeCount=2;
     // Start is called before the first frame update
     void Start()
     {
-        lastY = 3.5f;
+        GameObject initGround=Instantiate(groundPrefab, new Vector3(0,-5,0), Quaternion.identity);
+        initGround.transform.localScale = new Vector3(23f, 5f, 1f);
+        //Instantiate(playerPrefab, new Vector3(-1f,-2f,0f), Quaternion.identity);
+        lastY = -2.5f;
     }
 
     // Update is called once per frame
@@ -27,26 +29,26 @@ public class LevelGenerator : MonoBehaviour
     }
 
     void GenerateGround(){
-        List<Vector3> spawnPositions = new List<Vector3>();
-        for (int i = 0; i < maxAttempts; i++){
-            float spawnX = Random.Range(minX, maxX);
-            float spawnY = lastY + Random.Range(minDisY, maxDisY);
-            bool valid = true;
-            for(int j=0;j<spawnPositions.Count;j++){
-                float disX=Mathf.Abs(spawnX-spawnPositions[j].x);
-                float disY=Mathf.Abs(spawnY-spawnPositions[j].y);
-                if(disX<minDisX || disY<minDisY || disY>maxDisY){
-                    valid=false;
-                    break;
-                }
-            }
-            if(valid){
-                spawnPositions.Add(new Vector3(spawnX, spawnY, 0));
-            }
+        if(groundType==0){
+            GenerateGroundType0();
         }
-        foreach(Vector3 pos in spawnPositions){
-            lastY=Mathf.Max(lastY,pos.y);
-            Instantiate(groundPrefab, pos, Quaternion.identity);
+        else if(groundType==1){
+            GenerateGroundType1();
         }
+    }
+
+    void GenerateGroundType0(){
+        lastY+=yGap;
+        Instantiate(groundPrefab, new Vector3(-5f,lastY,0f), Quaternion.identity);
+        Instantiate(groundPrefab, new Vector3(5f,lastY,0f), Quaternion.identity);
+        groundType=(groundType+1)%typeCount;
+    }
+
+    void GenerateGroundType1(){
+        lastY+=yGap;
+        Instantiate(groundPrefab, new Vector3(-10f,lastY,0f), Quaternion.identity);
+        Instantiate(groundPrefab, new Vector3(0f,lastY,0f), Quaternion.identity);
+        Instantiate(groundPrefab, new Vector3(10f,lastY,0f), Quaternion.identity);
+        groundType=(groundType+1)%typeCount;
     }
 }

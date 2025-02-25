@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class GroundDestroyer : MonoBehaviour
 {
-    public float moveSpeed=0.3f;
+    private Camera mainCamera;
     public float destroyY=-10f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        mainCamera = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y<destroyY){
+        if (mainCamera != null && transform.position.y < mainCamera.transform.position.y +destroyY){
             Destroy(gameObject);
         }
     }
