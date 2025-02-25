@@ -18,9 +18,9 @@ namespace Async
         }
         public void Init()
         {
-            GenerateSequence(Vector2.zero, "Sequence_Main");
+            InitSequence(Vector2.zero, "Sequence_Main");
         }
-        public void GenerateSequence(Vector2 localAnchorPosition, string sequenceID)
+        public void InitSequence(Vector2 localAnchorPosition, string sequenceID)
         {
             var sequenceData = GameDataManager.SequenceData[sequenceID];
             var sequenceView = Instantiate(sequencePrefab, sequenceContainer).GetComponent<SequenceView>();
@@ -76,7 +76,11 @@ namespace Async
             savedData.Add(sequenceID, sequenceData);
 
         }
-        public void Reorder()
+        public void SaveDOTweenSequence()
+        {
+
+        }
+        public void Rebuild()
         {
             SaveSequenceData("Sequence_Main");
             GameDataManager.SequenceData = savedData;
@@ -102,5 +106,6 @@ namespace Async
                     return res;
             }
         }
+
     }
 }
