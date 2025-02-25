@@ -40,15 +40,15 @@ public class PlayerManager : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
         {
             playerView.JumpStart();
         }
-        else if (Input.GetKey(KeyCode.K))
+        else if (Input.GetKey(KeyCode.K) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space))
         {
             playerView.JumpMaintain();
         }
-        else if (Input.GetKeyUp(KeyCode.K))
+        else if (Input.GetKeyUp(KeyCode.K) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space))
             {
                 playerView.JumpStop();
             }
