@@ -46,7 +46,7 @@ namespace Async
                 if (data.LinkedSequenceID != null)
                 {
 
-                    SequenceManager.Instance.GenerateSequence(localAnchorPosition + new Vector2(i * GameDataManager.CardConfig.CardSize, 0), data.LinkedSequenceID);
+                    SequenceManager.Instance.InitSequence(localAnchorPosition + new Vector2(i * GameDataManager.CardConfig.CardSize, 0), data.LinkedSequenceID);
                 }
             }
         }

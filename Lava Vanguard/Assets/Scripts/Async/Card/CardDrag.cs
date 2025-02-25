@@ -69,7 +69,7 @@ namespace Async
             if (GameDataManager.InventoryConfig.CheckInside(rectTransform.anchoredPosition))
             {
                 BackToInventory(cardView);
-                SequenceManager.Instance.Reorder();
+                SequenceManager.Instance.Rebuild();
                 return;
             }
             // 2. Drag to another empty slot.
@@ -91,7 +91,7 @@ namespace Async
                                     if (find)
                                     {
                                         BackToInventory(cardView);
-                                        SequenceManager.Instance.Reorder();
+                                        SequenceManager.Instance.Rebuild();
                                     }
                                     else
                                     {
@@ -112,7 +112,7 @@ namespace Async
                             }
 
 
-                            SequenceManager.Instance.Reorder();
+                            SequenceManager.Instance.Rebuild();
                             return;
                         }
                     }
