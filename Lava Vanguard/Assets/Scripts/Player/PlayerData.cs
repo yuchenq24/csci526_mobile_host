@@ -10,7 +10,7 @@ public class PlayerData
         this.jumpAirTime = jumpAirTime;
         this.jumpAirForce = jumpAirForce;
     }
-    public static PlayerData defaultData=new PlayerData(
+    public static PlayerData DefaultData=new PlayerData(
         speed:5f,
         jumpForce:5f,
         jumpAirTime:0.3f,

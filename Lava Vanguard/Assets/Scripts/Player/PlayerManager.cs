@@ -5,52 +5,61 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public PlayerView playerView;
-    public static PlayerManager Instance{get; private set;}
-    void Awake(){
-        Instance=this;
+    public static PlayerManager Instance { get; private set; }
+    void Awake()
+    {
+        Instance = this;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         playerView.Init();
     }
 
-    // Update is called once per frame
-    void Update(){
+    void Update()
+    {
         Move();
         Jump();
     }
 
-    void Move(){
-        if(Input.GetKey(KeyCode.A)){
+    void Move()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
             playerView.MoveLeft();
         }
-        else if(Input.GetKey(KeyCode.D)){
+        else if (Input.GetKey(KeyCode.D))
+        {
             playerView.MoveRight();
         }
-        else{
+        else
+        {
             playerView.MoveStop();
         }
     }
 
-    void Jump(){
-        if(Input.GetKeyDown(KeyCode.K)){
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
             playerView.JumpStart();
         }
-        else if(Input.GetKey(KeyCode.K)){
+        else if (Input.GetKey(KeyCode.K))
+        {
             playerView.JumpMaintain();
         }
-        else if(Input.GetKeyUp(KeyCode.K)){
-            playerView.JumpStop();
+        else if (Input.GetKeyUp(KeyCode.K))
+            {
+                playerView.JumpStop();
+            }
         }
+        /*
+         When the player leaves the ground, isGrounded is set to false
+         so that the player can't jump in the air.
+         */
+        // void OnCollisionExit2D(Collision2D collision){
+        //     if(collision.gameObject.CompareTag("Ground")){
+        //         isGrounded=false;
+        //     }
+        // }
     }
-    /*
-     When the player leaves the ground, isGrounded is set to false
-     so that the player can't jump in the air.
-     */
-    // void OnCollisionExit2D(Collision2D collision){
-    //     if(collision.gameObject.CompareTag("Ground")){
-    //         isGrounded=false;
-    //     }
-    // }
-}

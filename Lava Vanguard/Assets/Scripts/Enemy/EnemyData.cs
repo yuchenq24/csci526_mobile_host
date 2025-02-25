@@ -1,0 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public struct EnemyData { 
+    public string ID {  get; set; }
+    public string Name { get; set; }
+    public int Health { get; set; }
+    //TODO: weapon name, sprite name
+}

@@ -1,13 +1,16 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
-using UnityEngine.UIElements;
-using System.IO;
+using Async;
+
 
 public class GameDataManager : MonoBehaviour
 {
-    public static GameDataManager Instance {  get; private set; }
+    public static GameDataManager Instance { get; private set; }
+    /// <summary>
+    /// Async Data
+    /// </summary>
     public static Dictionary<string, CardSpriteData> CardData;
     public static Dictionary<string, SequenceData> SequenceData;
     public static InventoryData InventoryData;
@@ -16,6 +19,13 @@ public class GameDataManager : MonoBehaviour
     public static Dictionary<string, Sprite> ContentSprite;
     public static CardConfig CardConfig;
     public static InventoryConfig InventoryConfig;
+
+    /// <summary>
+    /// EnemyData
+    /// </summary>
+    public static Dictionary<string, EnemyData> EnemyData;
+    
+
     private void Awake()
     {
         if (Instance != null)
@@ -32,7 +42,7 @@ public class GameDataManager : MonoBehaviour
         LoadSprites();
         LoadConfigs();
     }
-    private static T LoadJson<T>(string path) 
+    private static T LoadJson<T>(string path)
     {
         var jsonText = Resources.Load<TextAsset>(path);
         if (jsonText == null)
