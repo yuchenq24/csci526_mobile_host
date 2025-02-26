@@ -13,11 +13,20 @@ namespace Async
         {
             Instance = this;
         }
+        /// <summary>
+        /// Just temp code!!!!!!!!!!!!!!!!!! 
+        /// </summary>
+        /// <param name="cardRankData"></param>
         public void GenerateBullet(CardRankData cardRankData)
         {
             if (cardRankData.CardID == "Card_01")
             {
-                var bulletView = Instantiate(bulletPrefab, bulletContainer).GetComponent<BulletView>();
+                var bulletView = Instantiate(bulletPrefab, PlayerManager.Instance.playerView.transform.position, Quaternion.identity, bulletContainer).GetComponent<BulletView>();  //ugly
+                var way = PlayerManager.Instance.playerView.transform.localScale.x; //ugly
+                if (way > 0)
+                    bulletView.speed = 10;
+                else
+                    bulletView.speed = -10;
             }
 
         }

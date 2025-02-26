@@ -48,6 +48,7 @@ namespace Async
                 dragStartType = DragType.Inventory;
             else
                 dragStartType = DragType.Sequence;
+            
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -150,7 +151,7 @@ namespace Async
             if (cardView.slot != null)
                 cardView.slot.content = null;
             cardView.slot = null;
-            if (cardView.cardRankData.LinkedSequenceID != null)
+            if (cardView.cardRankData.LinkedSequenceID != null && cardView.cardRankData.LinkedSequenceID != "Not_Ready") 
             {
 
                 var sequenceView = SequenceManager.Instance.sequenceViews[cardView.cardRankData.LinkedSequenceID];

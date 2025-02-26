@@ -35,12 +35,13 @@ public class GameDataManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
-    private void Start()
-    {
         LoadData();
         LoadSprites();
         LoadConfigs();
+    }
+    private void Start()
+    {
+        
     }
     private static T LoadJson<T>(string path)
     {
