@@ -106,7 +106,13 @@ namespace Async
         }
         public void UpdateDOTweenSequence()
         {
+            if (BulletManager.Instance == null)
+            {
+                Debug.LogWarning("No bullet manager detected! You could still config your weapon, but there is no bullet!");
+                return;
+            }
             sequence.Kill();
+           
             sequence = DOTween.Sequence();
             
             List<(int, SequenceView)> threads = new List<(int, SequenceView)>();
