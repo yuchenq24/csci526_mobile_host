@@ -13,6 +13,13 @@ namespace Async
         private bool draggable = true;
         private Transform originalParent;
         private Transform draggingParent;
+
+        public enum DragType
+        {
+            Sequence,
+            Inventory
+        }
+        private DragType dragStartType;
         private void Awake()
         {
 
@@ -36,19 +43,11 @@ namespace Async
             originalParent = transform.parent;
             originalPosition = rectTransform.anchoredPosition;
             transform.SetParent(draggingParent);
-            //1. Remove from original parent.
+            
             if (cardView.slot == null)
-            {
-                //cardView.inventoryView.RemoveCardView(cardView);
-                //cardView.inventoryView = null;
-                InventoryManager.Instance.inventoryView.RemoveCardView(cardView);
-            }
+                dragStartType = DragType.Inventory;
             else
-            {
-                //cardView.sequenceView.RemoveCardView(cardView);
-                cardView.slot.sequenceView.RemoveCardView(cardView);
-                //cardView.sequenceView = null;
-            }
+                dragStartType = DragType.Sequence;
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -65,6 +64,12 @@ namespace Async
         {
             if (!draggable)
                 return;
+
+            //Remove from old position
+            if (dragStartType == DragType.Inventory)
+            {
+                InventoryManager.Instance.inventoryView.RemoveCardView(cardView);
+            }
             // 1. Drag to inventory.
             if (GameDataManager.InventoryConfig.CheckInside(rectTransform.anchoredPosition))
             {
@@ -100,9 +105,9 @@ namespace Async
                                 }
                                 else
                                 {
-                                    var newLink = SequenceManager.Instance.GetNextLinkedSequenceID();
-                                    cardView.cardRankData.LinkedSequenceID = newLink;
-                                    SequenceManager.Instance.GenerateAsyncSequence(slot.rectTransform.anchoredPosition, newLink, cardView.cardRankData.Level);
+                                    var newLinkedSequence = SequenceManager.Instance.GetNextLinkedSequenceID();
+                                    cardView.cardRankData.LinkedSequenceID = newLinkedSequence;
+                                    SequenceManager.Instance.GenerateAsyncSequence(slot.rectTransform.anchoredPosition, newLinkedSequence, cardView.cardRankData.Level);
                                     sequence.Value.AddCardView(cardView, slot);
                                 }
                             }
@@ -123,6 +128,8 @@ namespace Async
             // 5. Drag to somewhere else.
             transform.SetParent(originalParent);
             rectTransform.anchoredPosition = originalPosition;
+
+            
         }
         private bool find = false;
         public void CheckRemoveAsync(CardView cardView, SlotView slotView)

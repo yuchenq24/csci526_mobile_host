@@ -59,6 +59,8 @@ namespace Async
 
         public void AddCardView(CardView cardView, SlotView slotView)
         {
+            if (cardView.slot != null) 
+                cardView.slot.sequenceView.RemoveCardView(cardView);
             cardView.slot = slotView;
             slotView.content = cardView;
             cardView.transform.SetParent(slotView.transform);

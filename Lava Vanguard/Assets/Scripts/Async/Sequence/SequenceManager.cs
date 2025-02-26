@@ -78,10 +78,6 @@ namespace Async
             savedData.Add(sequenceID, sequenceData);
 
         }
-        public void SaveDOTweenSequence()
-        {
-
-        }
         public void Rebuild()
         {
             SaveSequenceData("Sequence_Main");
