@@ -7,7 +7,7 @@ public class LevelGenerator : MonoBehaviour
     public GameObject groundPrefab;
     public GameObject playerPrefab;
     public float cameraDistance=5.0f;
-    public float yGap=2.0f;
+    public float yGap=1.5f;
     private float lastY;
     private int groundType=0;
     private int typeCount=2;
@@ -39,16 +39,18 @@ public class LevelGenerator : MonoBehaviour
 
     void GenerateGroundType0(){
         lastY+=yGap;
-        Instantiate(groundPrefab, new Vector3(-5f,lastY,0f), Quaternion.identity);
-        Instantiate(groundPrefab, new Vector3(5f,lastY,0f), Quaternion.identity);
+        Instantiate(groundPrefab, new Vector3(-8f,lastY,0f), Quaternion.identity);
+        Instantiate(groundPrefab, new Vector3(0f,lastY,0f), Quaternion.identity);
+        Instantiate(groundPrefab, new Vector3(8f,lastY,0f), Quaternion.identity);
         groundType=(groundType+1)%typeCount;
     }
 
     void GenerateGroundType1(){
         lastY+=yGap;
-        Instantiate(groundPrefab, new Vector3(-10f,lastY,0f), Quaternion.identity);
-        Instantiate(groundPrefab, new Vector3(0f,lastY,0f), Quaternion.identity);
-        Instantiate(groundPrefab, new Vector3(10f,lastY,0f), Quaternion.identity);
+        Instantiate(groundPrefab, new Vector3(-12f,lastY,0f), Quaternion.identity);
+        Instantiate(groundPrefab, new Vector3(-4f,lastY,0f), Quaternion.identity);
+        Instantiate(groundPrefab, new Vector3(4f,lastY,0f), Quaternion.identity);
+        Instantiate(groundPrefab, new Vector3(12f,lastY,0f), Quaternion.identity);
         groundType=(groundType+1)%typeCount;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public PlayerView playerView;
+    public GameObject deathMenuPanel;
     public static PlayerManager Instance { get; private set; }
     void Awake()
     {
@@ -49,17 +50,23 @@ public class PlayerManager : MonoBehaviour
             playerView.JumpMaintain();
         }
         else if (Input.GetKeyUp(KeyCode.K) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space))
-            {
-                playerView.JumpStop();
-            }
+        {
+            playerView.JumpStop();
         }
-        /*
-         When the player leaves the ground, isGrounded is set to false
-         so that the player can't jump in the air.
-         */
-        // void OnCollisionExit2D(Collision2D collision){
-        //     if(collision.gameObject.CompareTag("Ground")){
-        //         isGrounded=false;
-        //     }
-        // }
     }
+
+    public void KillPlayer()
+    {
+
+    }
+    /*
+        When the player leaves the ground, isGrounded is set to false
+        so that the player can't jump in the air.
+        */
+    // void OnCollisionExit2D(Collision2D collision){
+    //     if(collision.gameObject.CompareTag("Ground")){
+    //         isGrounded=false;
+    //     }
+    // }
+}
+
