@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -122,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &125678086 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5728313128061397053, guid: 2660f44a3f5a6c1499ad9ee480cbe843, type: 3}
-  m_PrefabInstance: {fileID: 302161115}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130801856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 115c09f8e2be54de7bbd3d9185145202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &141511073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4032494147129431645, guid: 7c37413ef3761244e800594c96d0d541, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9148028093608249357, guid: 7c37413ef3761244e800594c96d0d541, type: 3}
       propertyPath: m_LocalPosition.x
@@ -197,6 +187,17 @@ PrefabInstance:
       addedObject: {fileID: 746050922}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c37413ef3761244e800594c96d0d541, type: 3}
+--- !u!114 &141511074 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8588297483702280440, guid: 7c37413ef3761244e800594c96d0d541, type: 3}
+  m_PrefabInstance: {fileID: 141511073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115c09f8e2be54de7bbd3d9185145202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &302161115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -248,6 +249,10 @@ PrefabInstance:
     - target: {fileID: 6137571127715655826, guid: 2660f44a3f5a6c1499ad9ee480cbe843, type: 3}
       propertyPath: m_Name
       value: Character_PixelBot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137571127715655826, guid: 2660f44a3f5a6c1499ad9ee480cbe843, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6137571127715655826, guid: 2660f44a3f5a6c1499ad9ee480cbe843, type: 3}
       propertyPath: m_TagString
@@ -420,7 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3aa6bbccef9367418a1e0197e1ca149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerView: {fileID: 125678086}
+  playerView: {fileID: 141511074}
 --- !u!4 &1440598402
 Transform:
   m_ObjectHideFlags: 0

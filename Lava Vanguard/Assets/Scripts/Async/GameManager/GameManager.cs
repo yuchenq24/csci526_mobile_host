@@ -19,6 +19,5 @@ namespace Async
             SequenceManager.Instance.Init();
             InventoryManager.Instance.Init();
         }
-
     }
 }
