@@ -74,4 +74,11 @@ public class PlayerView : MonoBehaviour
             isGrounded = true;
         }
     }
+
+    public void UpdateHealth(int damage)
+    {
+        playerData.health -= damage;
+        Debug.Log(" now player health is: " + playerData.health);
+    }
+
 }
