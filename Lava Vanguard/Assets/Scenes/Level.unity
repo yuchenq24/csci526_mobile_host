@@ -1428,6 +1428,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 2130801856}
   cameraDistance: 5
   yGap: 1.5
+  enemyPrefab: {fileID: 605145247464328758, guid: d6b380be8cb8c794fae54a8b94318b65, type: 3}
 --- !u!4 &990588613
 Transform:
   m_ObjectHideFlags: 0

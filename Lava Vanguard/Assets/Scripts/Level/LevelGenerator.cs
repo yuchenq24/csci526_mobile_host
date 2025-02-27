@@ -11,6 +11,7 @@ public class LevelGenerator : MonoBehaviour
     private float lastY;
     private int groundType=0;
     private int typeCount=2;
+    public GameObject enemyPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +45,7 @@ public class LevelGenerator : MonoBehaviour
         Instantiate(groundPrefab, new Vector3(8f,lastY,0f), Quaternion.identity);
         groundType=(groundType+1)%typeCount;
     }
-
+    /*
     void GenerateGroundType1(){
         lastY+=yGap;
         Instantiate(groundPrefab, new Vector3(-12f,lastY,0f), Quaternion.identity);
@@ -52,5 +53,38 @@ public class LevelGenerator : MonoBehaviour
         Instantiate(groundPrefab, new Vector3(4f,lastY,0f), Quaternion.identity);
         Instantiate(groundPrefab, new Vector3(12f,lastY,0f), Quaternion.identity);
         groundType=(groundType+1)%typeCount;
+    }*/
+    void GenerateGroundType1()
+    {
+        lastY += yGap;
+
+        // 
+        CreatePlatformWithEnemy(new Vector3(-12f, lastY, 0f));
+        CreatePlatformWithEnemy(new Vector3(-4f, lastY, 0f));
+        CreatePlatformWithEnemy(new Vector3(4f, lastY, 0f));
+        CreatePlatformWithEnemy(new Vector3(12f, lastY, 0f));
+
+        groundType = (groundType + 1) % typeCount;
     }
+
+
+    void CreatePlatformWithEnemy(Vector3 position)
+    {
+        // 
+        GameObject platform = Instantiate(groundPrefab, position, Quaternion.identity);
+
+        //calculate top
+        float platformTopY = position.y + (platform.GetComponent<Collider2D>()?.bounds.extents.y ?? 0.5f);
+
+        // calculate bottom
+        float enemyBottomOffset = enemyPrefab.GetComponent<Collider2D>()?.bounds.extents.y ?? 0.5f;
+
+        // so that unity won't crash again when enemy is generated floating above the level or stuck in the level
+        Vector3 enemyPosition = new Vector3(position.x, platformTopY + enemyBottomOffset, position.z);
+
+        // 
+        Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
+    }
+
+
 }
