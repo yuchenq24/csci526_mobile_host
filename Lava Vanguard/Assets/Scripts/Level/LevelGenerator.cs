@@ -12,6 +12,7 @@ public class LevelGenerator : MonoBehaviour
     private int groundType=0;
     private int typeCount=2;
     public GameObject enemyPrefab;
+    public float enemyRate = 0.8f;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +38,7 @@ public class LevelGenerator : MonoBehaviour
             GenerateGroundType1();
         }
     }
-
+    /*
     void GenerateGroundType0(){
         lastY+=yGap;
         Instantiate(groundPrefab, new Vector3(-8f,lastY,0f), Quaternion.identity);
@@ -45,7 +46,7 @@ public class LevelGenerator : MonoBehaviour
         Instantiate(groundPrefab, new Vector3(8f,lastY,0f), Quaternion.identity);
         groundType=(groundType+1)%typeCount;
     }
-    /*
+    
     void GenerateGroundType1(){
         lastY+=yGap;
         Instantiate(groundPrefab, new Vector3(-12f,lastY,0f), Quaternion.identity);
@@ -54,37 +55,48 @@ public class LevelGenerator : MonoBehaviour
         Instantiate(groundPrefab, new Vector3(12f,lastY,0f), Quaternion.identity);
         groundType=(groundType+1)%typeCount;
     }*/
+
+    void GenerateGroundType0()
+    {
+        lastY += yGap;
+        CreatePlatformWithEnemyOrNot(new Vector3(-8f, lastY, 0f));
+        CreatePlatformWithEnemyOrNot(new Vector3(0f, lastY, 0f));
+        CreatePlatformWithEnemyOrNot(new Vector3(8f, lastY, 0f));
+        groundType = (groundType + 1) % typeCount;
+    }
+
     void GenerateGroundType1()
     {
         lastY += yGap;
 
-        // 
-        CreatePlatformWithEnemy(new Vector3(-12f, lastY, 0f));
-        CreatePlatformWithEnemy(new Vector3(-4f, lastY, 0f));
-        CreatePlatformWithEnemy(new Vector3(4f, lastY, 0f));
-        CreatePlatformWithEnemy(new Vector3(12f, lastY, 0f));
+        //now it has enemyRate possibility to generate an enemy
+        CreatePlatformWithEnemyOrNot(new Vector3(-12f, lastY, 0f));
+        CreatePlatformWithEnemyOrNot(new Vector3(-4f, lastY, 0f));
+        CreatePlatformWithEnemyOrNot(new Vector3(4f, lastY, 0f));
+        CreatePlatformWithEnemyOrNot(new Vector3(12f, lastY, 0f));
 
         groundType = (groundType + 1) % typeCount;
     }
 
-
-    void CreatePlatformWithEnemy(Vector3 position)
+    void CreatePlatformWithEnemyOrNot(Vector3 position)
     {
-        // 
+        // generate platform
         GameObject platform = Instantiate(groundPrefab, position, Quaternion.identity);
 
-        //calculate top
-        float platformTopY = position.y + (platform.GetComponent<Collider2D>()?.bounds.extents.y ?? 0.5f);
+        // 50% 
+        if (Random.value < enemyRate)
+        {
+            
+            float platformTopY = position.y + (platform.GetComponent<Collider2D>()?.bounds.extents.y ?? 0.5f);
 
-        // calculate bottom
-        float enemyBottomOffset = enemyPrefab.GetComponent<Collider2D>()?.bounds.extents.y ?? 0.5f;
+            float enemyBottomOffset = enemyPrefab.GetComponent<Collider2D>()?.bounds.extents.y ?? 0.5f;
 
-        // so that unity won't crash again when enemy is generated floating above the level or stuck in the level
-        Vector3 enemyPosition = new Vector3(position.x, platformTopY + enemyBottomOffset, position.z);
+            Vector3 enemyPosition = new Vector3(position.x, platformTopY + enemyBottomOffset, position.z);
 
-        // 
-        Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
+            Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
+        }
     }
+
 
 
 }
