@@ -7,6 +7,8 @@ public class Lava : MonoBehaviour
     public GameObject deathMenuPanel;
     public float cameraDistance=5f;
     private Camera mainCamera;
+    private float deathDelay = 3f;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -17,6 +19,12 @@ public class Lava : MonoBehaviour
             Debug.Log("Player is dead");
             Time.timeScale = 0f;
             deathMenuPanel.SetActive(true);
+        }else if (other.CompareTag("Enemy")){
+            Debug.Log("Enemy is dead in lava");
+            Destroy(other.gameObject, deathDelay);
+        }else if (other.CompareTag("Ground")){
+            Debug.Log("Ground is submerged in lava");
+            Destroy(other.gameObject, deathDelay);
         }
     }
 
