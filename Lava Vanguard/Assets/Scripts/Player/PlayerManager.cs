@@ -54,6 +54,18 @@ public class PlayerManager : MonoBehaviour
             playerView.JumpStop();
         }
     }
+    
+    public void GetHurt(int damage)
+    {
+        if (playerView == null )
+        {
+            Debug.LogError("error! playerview not initiated");
+            return;
+        }
+        playerView.UpdateHealth(damage);
+
+    } 
+    
 
     public void KillPlayer()
     {

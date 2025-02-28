@@ -40,5 +40,16 @@ public class EnemyView_PG : MonoBehaviour
         movingRight = !movingRight;
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+           PlayerManager.Instance.GetHurt(1);
+            Debug.Log(" HP - 1" );
+        }
+    }
+
+
 }
 

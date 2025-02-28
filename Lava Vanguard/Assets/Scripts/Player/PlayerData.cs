@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class PlayerData
 {
-    public PlayerData(float speed, float jumpForce, float jumpAirTime, float jumpAirForce){
+    
+    public PlayerData(float speed, float jumpForce, float jumpAirTime, float jumpAirForce, int health){
         this.speed = speed;
         this.jumpForce = jumpForce;
         this.jumpAirTime = jumpAirTime;
         this.jumpAirForce = jumpAirForce;
+        this.health = health;
     }
     public static PlayerData DefaultData=new PlayerData(
         speed:5f,
         jumpForce:5f,
         jumpAirTime:0.3f,
-        jumpAirForce:5f);
+        jumpAirForce:5f,
+        health:10);
 
     public float speed;
     public float jumpForce;
     public float jumpAirTime;
     public float jumpAirForce;
+    public int health;
 
 }
