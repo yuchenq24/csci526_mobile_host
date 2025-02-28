@@ -7,4 +7,9 @@ public struct EnemyData {
     public string Name { get; set; }
     public int Health { get; set; }
     //TODO: weapon name, sprite name
+    public EnemyType type { get; set; }
+}
+
+public enum EnemyType {
+    Flying,
 }
