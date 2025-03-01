@@ -15,6 +15,6 @@ public class EXPBarManager : MonoBehaviour
     void Update()
     {
         expBarFill.fillAmount = playerView.GetEXPPercent();
-        expLabel.text="Level: "+playerView.GetLevel();
+        expLabel.text = "Level: " + playerView.GetLevel();
     }
 }

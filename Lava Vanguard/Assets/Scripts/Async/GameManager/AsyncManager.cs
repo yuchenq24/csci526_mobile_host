@@ -17,5 +17,9 @@ namespace Async
             SequenceManager.Instance.Init();
             InventoryManager.Instance.Init();
         }
+        public void GainModuel()
+        {
+            InventoryManager.Instance.inventoryView.AddCardView(new CardRankData("000", "Card_01", 1));
+        }
     }
 }

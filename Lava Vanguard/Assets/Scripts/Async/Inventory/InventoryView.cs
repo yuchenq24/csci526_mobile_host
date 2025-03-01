@@ -47,5 +47,12 @@ namespace Async
             cardView.transform.SetParent(inventoryRectTransform);
             cardViews.Add(cardView);
         }
+        public void AddCardView(CardRankData data)
+        {
+            var cardView = Instantiate(cardPrefab, cardContainer).GetComponent<CardView>();
+            cardView.Init(null, GameDataManager.CardData[data.CardID], data);
+            cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);
+            cardViews.Add(cardView);
+        }
     }
 }

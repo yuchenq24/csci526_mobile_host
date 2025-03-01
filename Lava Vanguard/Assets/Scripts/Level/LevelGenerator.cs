@@ -65,23 +65,4 @@ public class LevelGenerator : MonoBehaviour
 
         groundType = (groundType + 1) % typeCount;
     }
-
-    /*void CreatePlatformWithEnemyOrNot(Vector3 position)
-    {
-        // generate platform
-        GameObject platform = Instantiate(groundPrefab, position, Quaternion.identity);
-
-        // 50% 
-        if (Random.value < enemyRate)
-        {
-
-            float platformTopY = position.y + (platform.GetComponent<Collider2D>()?.bounds.extents.y ?? 0.5f);
-
-            float enemyBottomOffset = enemyPrefab.GetComponent<Collider2D>()?.bounds.extents.y ?? 0.5f;
-
-            Vector3 enemyPosition = new Vector3(position.x, platformTopY + enemyBottomOffset, position.z);
-
-            Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
-        }
-    }*/
 }

@@ -16,6 +16,7 @@ public class GroundDestroyer : MonoBehaviour
     void Update()
     {
         if (mainCamera != null && transform.position.y < mainCamera.transform.position.y +destroyY){
+            LevelGenerator.Instance.grounds.Remove(gameObject);
             Destroy(gameObject);
         }
     }

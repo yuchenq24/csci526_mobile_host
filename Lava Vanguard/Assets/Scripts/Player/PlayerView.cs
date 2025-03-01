@@ -1,3 +1,4 @@
+using Async;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,10 @@ public class PlayerView : MonoBehaviour
     private int currentLevelExp=2;
     private int currentLevel=1;
     private float invincibleTempTime=0.0f;
+
+    //GoD! JUst temP CoDe
+    
+
     public void Init()
     {
         playerData = PlayerData.DefaultData;
@@ -121,6 +126,7 @@ public class PlayerView : MonoBehaviour
             this.exp-=currentLevelExp;
             currentLevelExp+=1;
             currentLevel+=1;
+            AsyncManager.Instance.GainModuel();
             //LevelManager.Instance.LevelUp();
         }
     }
