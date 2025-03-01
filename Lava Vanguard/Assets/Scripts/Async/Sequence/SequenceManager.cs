@@ -8,6 +8,7 @@ namespace Async
     {
         public static SequenceManager Instance { get; private set; }
         public Transform sequenceContainer;
+        public Transform draggingTransform;
         public GameObject sequencePrefab;
         public SequenceView MainSequence { get => sequenceViews["Sequence_Main"]; }
         public Dictionary<string, SequenceView> sequenceViews = new Dictionary<string, SequenceView>();

@@ -6,10 +6,6 @@ public struct EnemyData {
     public string ID {  get; set; }
     public string Name { get; set; }
     public int Health { get; set; }
-    //TODO: weapon name, sprite name
-    public EnemyType type { get; set; }
+    public float Speed { get; set; }
 }
 
-public enum EnemyType {
-    Flying,
-}

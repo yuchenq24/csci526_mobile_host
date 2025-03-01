@@ -87,6 +87,7 @@ public class GameDataManager : MonoBehaviour
         CardData = LoadDictionaryJson<CardSpriteData>("Json/CardData");
         SequenceData = LoadDictionaryJson<SequenceData>("Json/SequenceData");
         InventoryData = LoadJson<InventoryData>("Json/InventoryData");
+        EnemyData = LoadDictionaryJson<EnemyData>("Json/EnemyData");
     }
     private static void LoadSprites()
     {

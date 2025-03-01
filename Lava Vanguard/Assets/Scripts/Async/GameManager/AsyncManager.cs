@@ -4,12 +4,9 @@ using UnityEngine;
 namespace Async
 {
     //Just for temp testing
-    public class GameManager : MonoBehaviour
+    public class AsyncManager : MonoBehaviour
     {
-
-        public Transform draggingTransform;
-
-        public static GameManager Instance { get; private set; }
+        public static AsyncManager Instance { get; private set; }
         private void Awake()
         {
             Instance = this;

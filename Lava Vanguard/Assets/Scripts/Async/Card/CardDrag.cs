@@ -29,7 +29,7 @@ namespace Async
             cardView = GetComponent<CardView>();
             rectTransform = GetComponent<RectTransform>();
             canvas = GetComponentInParent<Canvas>();
-            draggingParent = GameManager.Instance.draggingTransform;
+            draggingParent = SequenceManager.Instance.draggingTransform;
             //originalParent = transform.parent;
         }
         public void Init(bool draggable)

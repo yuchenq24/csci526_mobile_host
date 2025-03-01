@@ -3,31 +3,27 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class EnemyView : MonoBehaviour
+public abstract class EnemyView : MonoBehaviour
 {
     public EnemyData enemyData;
-    public void Init(EnemyData enemyData)
+    public void Init(string ID)
     {
-        this.enemyData = enemyData;
+        enemyData = GameDataManager.EnemyData[ID];
+        transform.position = GetSpawnPosition();
+    }
+    protected abstract void Approching();
+    protected abstract Vector3 GetSpawnPosition();
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerManager.Instance.GetHurt(1);
+            Debug.Log(" HP - 1");
+        }
     }
     private void Update()
     {
-        // Looming
-        if (enemyData.type == EnemyType.Flying) {
-            FlyingEnemyUpdate();
-        }
-    }
-
-    private void FlyingEnemyUpdate() {
-        float speed = 1f;
-        float waveAmplitude = 2f;
-        float waveFrequency = 2f;
-        var playerPos = PlayerManager.Instance.playerView.transform.position;
-
-        var direction = (playerPos - transform.position).normalized;
-
-        transform.position += transform.up * Mathf.Sin(Time.time * waveFrequency) * waveAmplitude * Time.deltaTime;
-        transform.position += direction * speed * Time.deltaTime;
+        Approching();
     }
 }
 
