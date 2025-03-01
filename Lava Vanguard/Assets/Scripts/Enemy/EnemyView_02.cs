@@ -31,9 +31,8 @@ public class EnemyView_02 : EnemyView
     protected override Vector3 GetSpawnPosition()
     {
         var g = LevelGenerator.Instance.grounds[Random.Range(0, LevelGenerator.Instance.grounds.Count)];
-        return g.transform.position + new Vector3(0, 1, 0);
+        return g.transform.position + new Vector3(0, 0.25f, 0);
     }
-
     void Flip()
     {
         movingRight = !movingRight;

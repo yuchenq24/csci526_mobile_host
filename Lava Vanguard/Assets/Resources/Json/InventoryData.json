@@ -1,20 +1,3 @@
 {
-    "CardDatas": [
-        {
-            "ID": 0,
-            "CardID": "Card_01",
-            "Level": 1
-        },
-        {
-            "ID": 1,
-            "CardID": "Card_01",
-            "Level": 1
-        },
-        {
-            "ID": 2,
-            "CardID": "Card_Async",
-            "Level": 5,
-            "LinkedSequenceID": "Not_Ready"
-        }
-    ]
+    "CardDatas": []
 }

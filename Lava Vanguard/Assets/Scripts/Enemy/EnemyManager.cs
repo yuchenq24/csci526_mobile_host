@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -17,9 +18,11 @@ public class EnemyManager : MonoBehaviour
         var enemyView = Instantiate(enemyPrefabs[suffix],enemyContainer).GetComponent<EnemyView>();
         enemyView.Init("Enemy_0" + (suffix + 1));
     }
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-            GenerateRandomEnemy();
+        Sequence sequence = DOTween.Sequence();
+        sequence.AppendCallback(GenerateRandomEnemy);
+        sequence.AppendInterval(1f);
+        sequence.SetLoops(-1);
     }
 }
