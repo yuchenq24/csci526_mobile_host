@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     {
         Move();
         Jump();
+        UpdateInvincible();
     }
 
     void Move()
@@ -55,21 +56,26 @@ public class PlayerManager : MonoBehaviour
         }
     }
     
-    public void GetHurt(int damage)
+    public void GainEXP(int exp)
     {
-        if (playerView == null )
-        {
-            Debug.LogError("error! playerview not initiated");
-            return;
-        }
-        playerView.UpdateHealth(damage);
-
+        Debug.Log("Gain EXP"+exp);
+        playerView.UpdateExp(exp);
     } 
-    
+
+    public void GetHurt(int damage,bool mustKilled=false)
+    {
+        playerView.UpdateHealth(damage,mustKilled);
+    } 
+
+    void UpdateInvincible()
+    {
+        playerView.UpdateInvincible();
+    }
 
     public void KillPlayer()
     {
-
+        Time.timeScale = 0f;
+        deathMenuPanel.SetActive(true);
     }
     /*
         When the player leaves the ground, isGrounded is set to false

@@ -86,6 +86,7 @@ public class BulletView : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            PlayerManager.Instance.GainEXP(1);
             Debug.Log("Enemy is dead");
             Destroy(gameObject);
             Destroy(other.gameObject);

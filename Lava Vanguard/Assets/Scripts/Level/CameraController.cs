@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Camera mainCamera;
+    private Camera mainCamera;
     public GameObject player;
     public float cameraSpeedY = 0.3f;
     public float cameraFollowDistance = 5.0f;
+    void Start()
+    {
+        mainCamera = Camera.main;
+    }
     private void FixedUpdate()
     {
         Vector3 targetCameraPosition = mainCamera.transform.position;

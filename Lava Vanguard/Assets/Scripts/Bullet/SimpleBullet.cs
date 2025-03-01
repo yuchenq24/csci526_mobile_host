@@ -27,6 +27,8 @@ public class SimpleBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy")){
+            Debug.Log("Enemy is hit");
+            PlayerManager.Instance.GainEXP(1);
             Debug.Log("Enemy is dead");
             Destroy(gameObject);
             Destroy(other.gameObject);

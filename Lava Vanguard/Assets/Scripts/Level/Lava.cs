@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Lava : MonoBehaviour
 {
-    public GameObject deathMenuPanel;
     public float cameraDistance=5f;
     private Camera mainCamera;
     private float deathDelay = 3f;
@@ -17,8 +16,7 @@ public class Lava : MonoBehaviour
     {
         if (other.CompareTag("Player")){
             Debug.Log("Player is dead");
-            Time.timeScale = 0f;
-            deathMenuPanel.SetActive(true);
+            PlayerManager.Instance.GetHurt(10000,true);
         }else if (other.CompareTag("Enemy")){
             Debug.Log("Enemy is dead in lava");
             Destroy(other.gameObject, deathDelay);

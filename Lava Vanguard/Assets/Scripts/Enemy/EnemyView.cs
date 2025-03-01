@@ -22,7 +22,6 @@ public abstract class EnemyView : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerManager.Instance.GetHurt(1);
-            Debug.Log(" HP - 1");
         }
     }
     private void Update()
