@@ -81,4 +81,8 @@ public class PlayerView : MonoBehaviour
         Debug.Log(" now player health is: " + playerData.health);
     }
 
+    public int GetCurrentHealth()
+    {
+        return playerData.health;
+    }
 }
