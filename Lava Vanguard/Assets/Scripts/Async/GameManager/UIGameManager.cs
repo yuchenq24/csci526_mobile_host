@@ -14,13 +14,9 @@ namespace Async
         public UIPanel[] UIPanels;
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                Show<WeaponPanel>();
-            }
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                Hide<WeaponPanel>();
+                Switch<WeaponPanel>();
             }
         }
         public void Show<T>() where T : UIPanel
@@ -35,6 +31,13 @@ namespace Async
             foreach (var p in UIPanels)
             {
                 if (p is T) p.Hide();
+            }
+        }
+        public void Switch<T> () where T : UIPanel
+        {
+            foreach (var p in UIPanels)
+            {
+                if (p is T) p.Switch();
             }
         }
     }
