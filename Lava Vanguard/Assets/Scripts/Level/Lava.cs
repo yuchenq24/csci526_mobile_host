@@ -22,9 +22,6 @@ public class Lava : MonoBehaviour
         }else if (other.CompareTag("Enemy")){
             Debug.Log("Enemy is dead in lava");
             Destroy(other.gameObject, deathDelay);
-        }else if (other.CompareTag("Ground")){
-            Debug.Log("Ground is submerged in lava");
-            Destroy(other.gameObject, deathDelay);
         }
     }
 
