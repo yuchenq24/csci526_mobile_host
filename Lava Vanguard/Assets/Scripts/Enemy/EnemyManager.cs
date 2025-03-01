@@ -20,9 +20,6 @@ public class EnemyManager : MonoBehaviour
     }
     private void Start()
     {
-        Sequence sequence = DOTween.Sequence();
-        sequence.AppendCallback(GenerateRandomEnemy);
-        sequence.AppendInterval(1f);
-        sequence.SetLoops(-1);
+        InvokeRepeating(nameof(GenerateRandomEnemy), 1f, 1f);
     }
 }

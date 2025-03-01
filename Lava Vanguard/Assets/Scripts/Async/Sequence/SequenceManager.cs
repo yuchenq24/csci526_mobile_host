@@ -148,5 +148,9 @@ namespace Async
             }
             sequence.SetLoops(-1);
         }
+        private void OnDestroy()
+        {
+            sequence.Kill();
+        }
     }
 }
