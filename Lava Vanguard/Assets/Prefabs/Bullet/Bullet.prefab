@@ -102,10 +102,10 @@ MonoBehaviour:
   speed: 10
   lifeDistance: 10
   detectionRange: 10
+  maxAimDeviation: 5
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 1
-  drawGizmos: 1
+    m_Bits: 64
 --- !u!61 &2606262456358068425
 BoxCollider2D:
   m_ObjectHideFlags: 0

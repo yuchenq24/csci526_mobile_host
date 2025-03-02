@@ -23,10 +23,7 @@ namespace Async
             {
                 var bulletView = Instantiate(bulletPrefab, PlayerManager.Instance.playerView.transform.position, Quaternion.identity, bulletContainer).GetComponent<BulletView>();  //ugly
                 var way = PlayerManager.Instance.playerView.transform.localScale.x; //ugly
-                if (way > 0)
-                    bulletView.speed = 10;
-                else
-                    bulletView.speed = 10;
+                bulletView.speed = 10;
             }
 
         }

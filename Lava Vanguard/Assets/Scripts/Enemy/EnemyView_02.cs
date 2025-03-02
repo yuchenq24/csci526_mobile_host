@@ -7,12 +7,15 @@ public class EnemyView_02 : EnemyView
     private bool movingRight = true; 
     private float leftLimit;
     private float rightLimit;
+    private Camera mainCamera;
+    public float destroyY=-10f;
 
     private void Start()
     {
         //hardcode!
         leftLimit = transform.position.x - 1.2f;
         rightLimit = transform.position.x + 1.2f;
+        mainCamera = Camera.main;
     }
     protected override void Approching()
     {
@@ -26,6 +29,9 @@ public class EnemyView_02 : EnemyView
         else if (!movingRight && transform.position.x <= leftLimit)
         {
             Flip();
+        }
+        if (mainCamera != null && transform.position.y < mainCamera.transform.position.y +destroyY){
+            Destroy(gameObject);
         }
     }
     protected override Vector3 GetSpawnPosition()
