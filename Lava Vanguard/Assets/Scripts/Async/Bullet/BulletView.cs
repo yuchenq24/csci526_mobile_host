@@ -10,7 +10,7 @@ public class BulletView : MonoBehaviour
 
     [Header("Auto-Aiming")]
     private bool hasTarget = false; 
-    public float detectionRange = 10.0f;
+    public float detectionRange = 6.0f;
     public float maxAimDeviation = 5f;
     public LayerMask enemyLayer;       
     private Vector3 fireDirection;
@@ -33,7 +33,14 @@ public class BulletView : MonoBehaviour
         {   
             if (enemy.CompareTag("Enemy") && enemy.gameObject.activeInHierarchy)
             {
-                float distance = Vector3.Distance(enemy.transform.position, transform.position);
+                Rigidbody2D targetRb = enemy.GetComponent<Rigidbody2D>();
+                Vector3 targetVelocity = targetRb != null ? targetRb.velocity : Vector3.zero;
+
+                Vector3 targetPosition = enemy.transform.position;
+                float timeToHit = Vector3.Distance(transform.position, targetPosition) / speed;
+                Vector3 predictedPosition = targetPosition + targetVelocity * timeToHit;
+
+                float distance = Vector3.Distance(predictedPosition, transform.position);
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
@@ -44,6 +51,7 @@ public class BulletView : MonoBehaviour
 
         if (closestEnemy != null)
         {
+            // Debug.Log("ClosestEnemy: " + closestEnemy.position);
             fireDirection = (closestEnemy.position - transform.position).normalized;
             hasTarget = true;
         }
@@ -56,20 +64,15 @@ public class BulletView : MonoBehaviour
     }
 
     private void ApplyInitialRotation()
-    {
+    {   
+        // Debug.Log("Fire Direction: " + fireDirection);
         if (hasTarget)
         {   
+            transform.forward = fireDirection;
             // float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
-            // float angle = Vector3.SignedAngle(Vector3.up, fireDirection, Vector3.forward);
-            angle = Mathf.Rad2Deg * Mathf.Atan2(fireDirection.y, fireDirection.x);
-            // if(fireDirection.x < 0)
-            // {
-            //     angle += 90;
-            // }else{
-            //     angle -= 90;
-            // }
+            
             // transform.rotation = Quaternion.Euler(0,0,angle);
-            transform.localEulerAngles = new Vector3(0, 0, angle);
+            transform.localEulerAngles = new Vector3(0, 0, transform.localEulerAngles.z);
         }
     }
 

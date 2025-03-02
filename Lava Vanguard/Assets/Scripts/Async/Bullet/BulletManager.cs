@@ -26,7 +26,7 @@ namespace Async
                 if (way > 0)
                     bulletView.speed = 10;
                 else
-                    bulletView.speed = -10;
+                    bulletView.speed = 10;
             }
 
         }
