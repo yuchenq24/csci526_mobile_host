@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 namespace Async
 {
@@ -13,7 +12,7 @@ namespace Async
         public SequenceView MainSequence { get => sequenceViews["Sequence_Main"]; }
         public Dictionary<string, SequenceView> sequenceViews = new Dictionary<string, SequenceView>();
         public Dictionary<string, SequenceData> savedData = new Dictionary<string, SequenceData>();
-        public Sequence sequence;
+        
         private void Awake()
         {
             Instance = this;
@@ -21,7 +20,7 @@ namespace Async
         public void Init()
         {
             InitSequence(Vector2.zero, "Sequence_Main");
-            UpdateDOTweenSequence();
+            UpdateCustomSequence();
         }
         public void InitSequence(Vector2 localAnchorPosition, string sequenceID)
         {
@@ -105,25 +104,31 @@ namespace Async
                     return res;
             }
         }
-        public void UpdateDOTweenSequence()
+        public void UpdateCustomSequence()
         {
             if (BulletManager.Instance == null)
             {
                 Debug.LogWarning("No bullet manager detected! You could still config your weapon, but there is no bullet!");
                 return;
             }
-            sequence.Kill();
-           
-            sequence = DOTween.Sequence();
-            
+
+            StopAllCoroutines(); 
+            StartCoroutine(RunSequence());
+        }
+
+        private IEnumerator RunSequence()
+        {
             List<(int, SequenceView)> threads = new List<(int, SequenceView)>();
             threads.Add((0, MainSequence));
+
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    if (j >= threads.Count) 
-                        sequence.AppendInterval(0.05f);
+                    if (j >= threads.Count)
+                    {
+                        yield return new WaitForSeconds(0.05f);
+                    }
                     else
                     {
                         if (i - threads[j].Item1 >= threads[j].Item2.slots.Count)
@@ -133,12 +138,12 @@ namespace Async
                         }
                         if (threads[j].Item2.slots[i - threads[j].Item1].content == null)
                         {
-                            sequence.AppendInterval(0.05f);
+                            yield return new WaitForSeconds(0.05f);
                             continue;
                         }
                         CardRankData data = threads[j].Item2.slots[i - threads[j].Item1].content.cardRankData;
-                        sequence.AppendCallback(() => BulletManager.Instance.GenerateBullet(data));
-                        sequence.AppendInterval(0.05f);
+                        BulletManager.Instance.GenerateBullet(data);
+                        yield return new WaitForSeconds(0.05f);
                         if (data.LinkedSequenceID != null)
                         {
                             threads.Add((i, sequenceViews[data.LinkedSequenceID]));
@@ -146,11 +151,13 @@ namespace Async
                     }
                 }
             }
-            sequence.SetLoops(-1);
+
+            StartCoroutine(RunSequence()); 
         }
+
         private void OnDestroy()
         {
-            sequence.Kill();
+            StopAllCoroutines();
         }
     }
 }
