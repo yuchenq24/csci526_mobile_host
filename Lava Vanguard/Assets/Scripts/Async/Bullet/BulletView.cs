@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletView : MonoBehaviour
 {
     public float speed = 1.0f;
-    public float lifeDistance = 10.0f;
+    public float lifeDistance = 30.0f;
     private Vector3 startPosition;
 
     [Header("Auto-Aiming")]

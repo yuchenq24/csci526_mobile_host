@@ -23,18 +23,25 @@ public class EnemyView_01 : EnemyView
         float buffer = 2f; // Extra distance off-screen
         int side = Random.Range(0, 4); // 0 = Left, 1 = Right, 2 = Top, 3 = Bottom
 
+        Vector3 spawnPosition;
         switch (side)
         {
             case 0: // Left
-                return new Vector3(-cameraWidth / 2 - buffer, Random.Range(-cameraHeight / 2, cameraHeight / 2), 0);
+                spawnPosition = new Vector3(-cameraWidth / 2 - buffer, Random.Range(-cameraHeight / 2, cameraHeight / 2), 0);
+                break;
             case 1: // Right
-                return new Vector3(cameraWidth / 2 + buffer, Random.Range(-cameraHeight / 2, cameraHeight / 2), 0);
+                spawnPosition = new Vector3(cameraWidth / 2 + buffer, Random.Range(-cameraHeight / 2, cameraHeight / 2), 0);
+                break;
             case 2: // Top
-                return new Vector3(Random.Range(-cameraWidth / 2, cameraWidth / 2), cameraHeight / 2 + buffer, 0);
+                spawnPosition = new Vector3(Random.Range(-cameraWidth / 2, cameraWidth / 2), cameraHeight / 2 + buffer, 0);
+                break;
             case 3: // Bottom
-                return new Vector3(Random.Range(-cameraWidth / 2, cameraWidth / 2), -cameraHeight / 2 - buffer, 0);
+                spawnPosition = new Vector3(Random.Range(-cameraWidth / 2, cameraWidth / 2), -cameraHeight / 2 - buffer, 0);
+                break;
             default:
-                return Vector3.zero;
+                spawnPosition = Vector3.zero;
+                break;
         }
+        return camera.transform.position + spawnPosition;
     }
 }

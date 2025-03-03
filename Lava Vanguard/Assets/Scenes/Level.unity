@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3537,9 +3536,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4018315243681483767, guid: 7c37413ef3761244e800594c96d0d541, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018315243681483767, guid: 7c37413ef3761244e800594c96d0d541, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 711064581
+      objectReference: {fileID: 0}
     - target: {fileID: 4032494147129431645, guid: 7c37413ef3761244e800594c96d0d541, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875312116369761100, guid: 7c37413ef3761244e800594c96d0d541, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875312116369761100, guid: 7c37413ef3761244e800594c96d0d541, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 711064581
       objectReference: {fileID: 0}
     - target: {fileID: 9148028093608249357, guid: 7c37413ef3761244e800594c96d0d541, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5178,8 +5193,8 @@ SceneRoots:
   - {fileID: 927322169}
   - {fileID: 1132470045}
   - {fileID: 1239681527}
-  - {fileID: 1160724377}
   - {fileID: 8032112463621836350}
+  - {fileID: 1160724377}
   - {fileID: 1888842051}
   - {fileID: 691565543}
   - {fileID: 1722034901}

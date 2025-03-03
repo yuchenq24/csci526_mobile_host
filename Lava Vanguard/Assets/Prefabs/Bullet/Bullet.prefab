@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  lifeDistance: 10
+  lifeDistance: 30
   detectionRange: 10
   maxAimDeviation: 5
   enemyLayer:
