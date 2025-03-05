@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Async;
 
 public class PauseMamager : MonoBehaviour
 {
@@ -47,5 +47,9 @@ public class PauseMamager : MonoBehaviour
     public void Quit(){
         Time.timeScale = 1f;
         SceneManager.LoadScene("Start");
+    }
+
+    public void SwitchWeaponPanel(){
+        UIGameManager.Instance.Switch<WeaponPanel>();
     }
 }

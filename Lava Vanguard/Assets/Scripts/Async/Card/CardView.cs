@@ -14,7 +14,6 @@ namespace Async
 
         public SlotView slot;
 
-
         public RectTransform rectTransform;
         public Image background;
         public Image outline;
@@ -24,7 +23,6 @@ namespace Async
             this.slot = slot;
             this.cardSpriteData = cardSpriteData;
             this.cardRankData = cardRankData;
-
             //Init size
             rectTransform = GetComponent<RectTransform>();
             rectTransform.sizeDelta = Vector2.one * GameDataManager.CardConfig.CardSize;

@@ -114,9 +114,19 @@ public class PlayerView : MonoBehaviour
         }
     }
 
-    public float GetHeartPercent()
+    public float GetHealthPercent()
     {
         return 1.0f*health/playerData.maxHealth;
+    }
+
+    public float GetMaxHealth()
+    {
+        return playerData.maxHealth;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return health;
     }
 
     public void UpdateExp(int exp)
@@ -126,8 +136,7 @@ public class PlayerView : MonoBehaviour
             this.exp-=currentLevelExp;
             currentLevelExp+=1;
             currentLevel+=1;
-            AsyncManager.Instance.GainModuel();
-            //LevelManager.Instance.LevelUp();
+            CardSelectionManager.Instance.StartSelection();
         }
     }
 
