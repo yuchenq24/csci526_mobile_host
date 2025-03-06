@@ -20,6 +20,23 @@ public class LevelGenerator : MonoBehaviour
     private float lastY;
     private int groundType = 0;
     private int typeCount = 2;
+
+    [Header("Platform generator parameters")]
+    public int minPlatformsPerRow = 1;
+    public int maxPlatformsPerRow = 4;
+
+    public float minPlatformLength = 2f;
+    public float maxPlatformLength = 5f;
+    public float maxHorizontalJump = 6f;
+    public float xMin = -12f, xMax = 12f;
+    private List<PlatformData> previousRowPlatforms = new List<PlatformData>();
+
+    private struct PlatformData
+    {
+        public float centerX;
+        public float halfLength;
+    }
+
     private void Awake()
     {
         Instance = this;
@@ -41,7 +58,8 @@ public class LevelGenerator : MonoBehaviour
     {
         if (Camera.main.transform.position.y + cameraDistance > lastY)
         {
-            GenerateGround();
+            // GenerateGround();
+            RandomGround();
         }
     }
 
@@ -64,5 +82,73 @@ public class LevelGenerator : MonoBehaviour
         }
 
         groundType = (groundType + 1) % typeCount;
+    }
+
+    
+
+
+    void RandomGround() {
+
+        lastY += yGap;
+        List<PlatformData> current = new List<PlatformData>();
+        int numPlatforms = Random.Range(minPlatformsPerRow, maxPlatformsPerRow + 1);
+
+        // guarantee at least one platform is reachable
+        if (previousRowPlatforms.Count > 0) {
+            var prev = previousRowPlatforms[Random.Range(0, previousRowPlatforms.Count)];
+            // Within the jump range
+            float offset = Random.Range(-maxHorizontalJump, maxHorizontalJump);
+            
+            float platformLength = Random.Range(minPlatformLength, maxPlatformLength);
+            float halfLength = platformLength / 2;
+            // The new platform should be within (xMin, xMax)
+            float centerX = Mathf.Clamp(prev.centerX + offset, xMin + halfLength, xMax - halfLength);
+
+            var platform = Instantiate(groundPrefab, new Vector3(centerX, lastY, 0), Quaternion.identity, groundContainer);
+
+            Vector3 scale = platform.transform.localScale;
+            scale.x = platformLength;
+            platform.transform.localScale = scale;
+
+            current.Add(new PlatformData {
+                centerX = centerX,
+                halfLength = halfLength,
+            });
+
+            numPlatforms -= 1;
+
+            grounds.Add(platform);
+        }
+
+        float rowWidth = xMax - xMin;
+        float segmentWidth = rowWidth / numPlatforms;
+        
+        for (int i = 0; i < numPlatforms; i++)
+        {
+            // Randomly assign a platform length.
+            float platformLength = Random.Range(minPlatformLength, maxPlatformLength);
+            float halfLength = platformLength / 2f;
+            
+            // Determine the boundaries of this segment.
+            float segStart = xMin + i * segmentWidth;
+            float segEnd = xMin + (i + 1) * segmentWidth;
+
+            float centerX = Random.Range(segStart + halfLength, segEnd - halfLength);
+            
+            var platform = Instantiate(groundPrefab, new Vector3(centerX, lastY, 0), Quaternion.identity, groundContainer);
+
+            Vector3 scale = platform.transform.localScale;
+            scale.x = platformLength;
+            platform.transform.localScale = scale;
+            
+            current.Add(new PlatformData {
+                centerX = centerX,
+                halfLength = halfLength,
+            });
+
+            grounds.Add(platform);
+        }
+
+        previousRowPlatforms = current;
     }
 }
