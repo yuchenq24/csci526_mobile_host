@@ -9,10 +9,12 @@ public class CardSelectionManager : MonoBehaviour
     public static CardSelectionManager Instance { get; private set; }
     public GameObject cardSelectionPanel;
     public Button[] cardButtons;
-    public Image[] cardBackgrounds;
-    public Image[] cardOutlines;
-    public Image[] cardContents;
+    public GameObject[] cardPrefabs=new GameObject[3];
     public TextMeshProUGUI[] cardDescriptions;
+
+    private GameObject[] instantiatedCards = new GameObject[3];
+    private Vector2 cardOffset = new Vector2(20, 300);
+
 
     //private List<Module> availableModules = new List<Module>();
     //private Module[] selectedModules = new Module[3];
@@ -37,16 +39,37 @@ public class CardSelectionManager : MonoBehaviour
     }
     public void StartSelection(){
         Time.timeScale = 0;
+        int []indices=ShuffleIndices(cardPrefabs.Length,3);
+        Debug.Log("Shuffled indices: " + string.Join(",", indices));
         for(int i=0;i<3;i++){
-            CardSpriteData cardSpriteData = GameDataManager.CardData["Card_01"];
-            cardBackgrounds[i].sprite = GameDataManager.BackgroundSprite[cardSpriteData.Background];
-            cardOutlines[i].sprite = GameDataManager.OutlineSprite[cardSpriteData.Outline];
-            cardContents[i].sprite = GameDataManager.ContentSprite[cardSpriteData.Content];
-            cardDescriptions[i].text = ""+Time.time;
+            if (instantiatedCards[i] != null) {
+                Destroy(instantiatedCards[i]);
+            }
+            Debug.Log("Instantiating card at index: " + indices[i]);
+            instantiatedCards[i] = Instantiate(cardPrefabs[indices[i]], cardButtons[i].transform);
+            RectTransform cardRect = instantiatedCards[i].GetComponent<RectTransform>();
+            cardRect.anchoredPosition = cardOffset;
+            cardRect.localScale = Vector3.one;
+
+            cardDescriptions[i].text = "Card " + indices[i] + " at time: " + Time.time;
         }
         cardSelectionPanel.SetActive(true);
     }
 
+    private int[] ShuffleIndices(int n,int k){
+        int[] indices=new int[n];
+        for (int i = 0; i < n; i++)
+        {
+            indices[i] = i;
+        }
+
+        for (int i = n - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (indices[i], indices[j]) = (indices[j], indices[i]);
+        }
+        return indices[..k];
+    }
     private void SelectCard(int index){
         Debug.Log("Selecting card at index: " + index);
         InventoryManager.Instance.inventoryView.AddCardView(new CardRankData("000", "Card_01", 1));
