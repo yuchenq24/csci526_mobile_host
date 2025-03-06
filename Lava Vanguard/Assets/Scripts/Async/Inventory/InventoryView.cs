@@ -14,7 +14,7 @@ namespace Async
         public GridLayoutGroup gridLayoutGroup;
 
         public Transform cardContainer;
-        public GameObject cardPrefab;
+        public GameObject[] cardPrefabs;
 
         public List<CardView> cardViews = new List<CardView>();
         public void Init()
@@ -31,7 +31,7 @@ namespace Async
                 var data = inventoryData.CardDatas[i];
                 if (data.CardID != "Card_Empty")
                 {
-                    var cardView = Instantiate(cardPrefab, cardContainer).GetComponent<CardView>();
+                    var cardView = Instantiate(cardPrefabs[0], cardContainer).GetComponent<CardView>();
                     cardView.Init(null, GameDataManager.CardData[data.CardID], data);
                     cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);
                     cardViews.Add(cardView);
@@ -49,10 +49,18 @@ namespace Async
         }
         public void AddCardView(CardRankData data)
         {
-            var cardView = Instantiate(cardPrefab, cardContainer).GetComponent<CardView>();
-            cardView.Init(null, GameDataManager.CardData[data.CardID], data);
-            cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);
-            cardViews.Add(cardView);
+            if(data.CardID=="Card_01"){
+                var cardView = Instantiate(cardPrefabs[0], cardContainer).GetComponent<CardView>();
+                cardView.Init(null, GameDataManager.CardData[data.CardID], data);
+                cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);
+                cardViews.Add(cardView);
+            }
+            else if(data.CardID=="Card_Async2"){
+                var cardView = Instantiate(cardPrefabs[1], cardContainer).GetComponent<CardView>();
+                cardView.Init(null, GameDataManager.CardData[data.CardID], data);
+                cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);
+                cardViews.Add(cardView);
+            }
         }
     }
 }

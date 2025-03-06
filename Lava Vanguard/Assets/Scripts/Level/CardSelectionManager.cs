@@ -14,7 +14,7 @@ public class CardSelectionManager : MonoBehaviour
 
     private GameObject[] instantiatedCards = new GameObject[3];
     private Vector2 cardOffset = new Vector2(20, 300);
-
+    private int[] selectedIndices=new int[3];
 
     //private List<Module> availableModules = new List<Module>();
     //private Module[] selectedModules = new Module[3];
@@ -39,19 +39,19 @@ public class CardSelectionManager : MonoBehaviour
     }
     public void StartSelection(){
         Time.timeScale = 0;
-        int []indices=ShuffleIndices(cardPrefabs.Length,3);
-        Debug.Log("Shuffled indices: " + string.Join(",", indices));
+        selectedIndices=ShuffleIndices(cardPrefabs.Length,3);
+        Debug.Log("Shuffled indices: " + string.Join(",", selectedIndices));
         for(int i=0;i<3;i++){
             if (instantiatedCards[i] != null) {
                 Destroy(instantiatedCards[i]);
             }
-            Debug.Log("Instantiating card at index: " + indices[i]);
-            instantiatedCards[i] = Instantiate(cardPrefabs[indices[i]], cardButtons[i].transform);
+            Debug.Log("Instantiating card at index: " + selectedIndices[i]);
+            instantiatedCards[i] = Instantiate(cardPrefabs[selectedIndices[i]], cardButtons[i].transform);
             RectTransform cardRect = instantiatedCards[i].GetComponent<RectTransform>();
             cardRect.anchoredPosition = cardOffset;
             cardRect.localScale = Vector3.one;
 
-            cardDescriptions[i].text = "Card " + indices[i] + " at time: " + Time.time;
+            cardDescriptions[i].text = "Card " + selectedIndices[i] + " at time: " + Time.time;
         }
         cardSelectionPanel.SetActive(true);
     }
@@ -71,8 +71,8 @@ public class CardSelectionManager : MonoBehaviour
         return indices[..k];
     }
     private void SelectCard(int index){
-        Debug.Log("Selecting card at index: " + index);
-        InventoryManager.Instance.inventoryView.AddCardView(new CardRankData("000", "Card_01", 1));
+        Debug.Log("Selecting card at index: " + index+" with card ID: "+selectedIndices[index]);
+        AsyncManager.Instance.GainCard(selectedIndices[index]);
         cardSelectionPanel.SetActive(false);
         Time.timeScale = 1;
     }

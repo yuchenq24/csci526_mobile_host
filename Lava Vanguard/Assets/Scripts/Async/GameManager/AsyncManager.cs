@@ -17,9 +17,16 @@ namespace Async
             SequenceManager.Instance.Init();
             InventoryManager.Instance.Init();
         }
-        public void GainModuel()
+        public void GainCard(int cardIndex)
         {
-            InventoryManager.Instance.inventoryView.AddCardView(new CardRankData("000", "Card_01", 1));
+            switch(cardIndex){
+                case 0:
+                InventoryManager.Instance.inventoryView.AddCardView(new CardRankData("000", "Card_01", 1));
+                break;
+                case 1:
+                InventoryManager.Instance.inventoryView.AddCardView(CardRankData.AsyncHead);
+                break;
+            }
         }
     }
 }
