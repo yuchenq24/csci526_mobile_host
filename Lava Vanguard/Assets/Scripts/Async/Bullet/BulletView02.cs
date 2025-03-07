@@ -10,6 +10,8 @@ public class BulletView02 : BulletView
 
     protected override void SetupBullet()
     {
+        lifeDistance = 15.0f;
+        detectionRange = 10.0f;
         speed = 8f;
         attack = 3;
         if (!isSplited)
@@ -42,7 +44,7 @@ public class BulletView02 : BulletView
         // If have enemy then fire that direction
         if (closestEnemy != null)
         {
-            fireDirection = (closestEnemy.position - transform.position).normalized;
+            fireDirection = ((Vector2)closestEnemy.position - (Vector2)transform.position).normalized;
             hasTarget = true;
         }
         else
@@ -100,7 +102,7 @@ public class BulletView02 : BulletView
         if (isSplited) return; 
         isSplited = true;
         transform.localScale *= 0.5f;
-        attack = attack / 3;
+        attack = attack * 2 / 3;
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)

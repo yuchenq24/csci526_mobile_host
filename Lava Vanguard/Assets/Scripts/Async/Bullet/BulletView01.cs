@@ -7,11 +7,12 @@ public class BulletView01 : BulletView
 
     [Header("Auto-Aiming")]
     protected float maxAimDeviation = 5f;   
-    private float detectionRange = 5.0f;
     private float selfDetectionRange = 5.0f;
     protected override void SetupBullet()
     {
-        speed = 10f;
+        lifeDistance = 8.0f;
+        detectionRange = 8.0f;
+        speed = 5f;
         attack = 3;
         FindClosestEnemy();
         ApplyInitialRotation();
@@ -47,7 +48,7 @@ public class BulletView01 : BulletView
         if (closestEnemy != null)
         {
             // Debug.Log("ClosestEnemy: " + closestEnemy.position);
-            fireDirection = (closestEnemy.position - transform.position).normalized;
+            fireDirection = ((Vector2)closestEnemy.position - (Vector2)transform.position).normalized;
             hasTarget = true;
         }
         else

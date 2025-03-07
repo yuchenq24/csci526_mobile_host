@@ -7,10 +7,10 @@ public class BulletView03 : BulletView
 
     [Header("Auto-Aiming")]
     protected float maxAimDeviation = 5f;
-    private float selfDetectionRange = 15.0f;   
 
     protected override void SetupBullet()
     {
+        detectionRange = lifeDistance = 20.0f;
         speed = 10f;
         attack = 3;
         FindClosestEnemy();
@@ -19,7 +19,7 @@ public class BulletView03 : BulletView
 
     private void FindClosestEnemy()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, selfDetectionRange, enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, detectionRange, enemyLayer);
         Transform closestEnemy = null;
         float closestDistance = Mathf.Infinity;
         Debug.Log($"Found {enemies.Length} enemies in range.");
@@ -47,7 +47,7 @@ public class BulletView03 : BulletView
         if (closestEnemy != null)
         {
             // Debug.Log("ClosestEnemy: " + closestEnemy.position);
-            fireDirection = (closestEnemy.position - transform.position).normalized;
+            fireDirection = ((Vector2)closestEnemy.position - (Vector2)transform.position).normalized;
             hasTarget = true;
         }
         else
@@ -79,7 +79,7 @@ public class BulletView03 : BulletView
         if (other.CompareTag("Enemy"))
         {
             PlayerManager.Instance.GainEXP(1);
-            Debug.Log("Enemy is dead");
+            Debug.Log("Ontrigger bullet3 Enemy is dead");
             Destroy(gameObject);
             Destroy(other.gameObject);
         }
