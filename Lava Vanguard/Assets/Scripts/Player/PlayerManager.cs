@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        //sessionID = DateTime.Now.Ticks;//generate unique id for forms
+        //startTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
     }
 
     void Start()
@@ -75,6 +78,8 @@ public class PlayerManager : MonoBehaviour
     public void KillPlayer()
     {
         Time.timeScale = 0f;
+        Debug.Log("kill player initiated");
+        FindObjectOfType<SendToGoogle>().RecordEndTime();
         deathMenuPanel.SetActive(true);
     }
     /*
