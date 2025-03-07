@@ -22,14 +22,15 @@ public class LevelGenerator : MonoBehaviour
     private int typeCount = 2;
 
     [Header("Platform generator parameters")]
-    public int minPlatformsPerRow = 1;
+    public int minPlatformsPerRow = 2;
     public int maxPlatformsPerRow = 4;
 
     public float minPlatformLength = 2f;
     public float maxPlatformLength = 5f;
-    public float maxHorizontalJump = 6f;
-    public float xMin = -12f, xMax = 12f;
+    public float maxHorizontalJump = 2.5f;
+    public float xMin = -15f, xMax = 15f;
     private List<PlatformData> previousRowPlatforms = new List<PlatformData>();
+    private List<int> PreviousReachable = new List<int>();
 
     private struct PlatformData
     {
@@ -95,14 +96,15 @@ public class LevelGenerator : MonoBehaviour
 
         // guarantee at least one platform is reachable
         if (previousRowPlatforms.Count > 0) {
-            var prev = previousRowPlatforms[Random.Range(0, previousRowPlatforms.Count)];
+            var prev = previousRowPlatforms[PreviousReachable[Random.Range(0, PreviousReachable.Count)]];
             // Within the jump range
             float offset = Random.Range(-maxHorizontalJump, maxHorizontalJump);
             
             float platformLength = Random.Range(minPlatformLength, maxPlatformLength);
             float halfLength = platformLength / 2;
             // The new platform should be within (xMin, xMax)
-            float centerX = Mathf.Clamp(prev.centerX + offset, xMin + halfLength, xMax - halfLength);
+            float centerX = offset > 0 ? (prev.centerX + prev.halfLength + offset + halfLength) : (prev.centerX - prev.halfLength + offset - halfLength);
+            centerX = Mathf.Clamp(centerX, xMin + halfLength, xMax - halfLength);
 
             var platform = Instantiate(groundPrefab, new Vector3(centerX, lastY, 0), Quaternion.identity, groundContainer);
 
@@ -149,6 +151,48 @@ public class LevelGenerator : MonoBehaviour
             grounds.Add(platform);
         }
 
+        GetReachablePlatforms(ref current);
+
         previousRowPlatforms = current;
+    }
+
+    void GetReachablePlatforms(ref List<PlatformData> current) {
+        var currentReachable = new List<int>();
+        Debug.Log(currentReachable.Count);
+        if (PreviousReachable.Count == 0) {
+            for (int i = 0; i < current.Count; i++) {
+                PreviousReachable.Add(i);
+            }
+            return;
+        }
+
+        for (int i = 0; i < current.Count; i++) {
+            for (int j = 0; j < PreviousReachable.Count; j++) {
+                Debug.Log(PreviousReachable[j]);
+                var c = current[i];
+                var p = previousRowPlatforms[PreviousReachable[j]];
+                bool reachable = false;
+                if (c.centerX < p.centerX) {
+                    float cRight = c.centerX + c.halfLength;
+                    float pLeft = p.centerX - p.halfLength;
+                    if (cRight >= pLeft || pLeft - cRight <= maxHorizontalJump) {
+                        reachable = true;
+                    }
+                } else {
+                    float cLeft = c.centerX - c.halfLength;
+                    float pRight = p.centerX + p.halfLength;
+                    if (pRight >= cLeft || cLeft - pRight <= maxHorizontalJump) {
+                        reachable = true;
+                    }
+                }
+
+                if (reachable) {
+                    currentReachable.Add(i);
+                    break;
+                }
+            }
+        }
+
+        PreviousReachable = currentReachable;
     }
 }
