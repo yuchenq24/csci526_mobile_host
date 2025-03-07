@@ -39,8 +39,11 @@ namespace Async
                 else if(data.CardID=="Bullet_02"){
                     cardView = Instantiate(cardPrefabs[1], cardContainer).GetComponent<CardView>();
                 }
-                else{
+                else if(data.CardID=="Bullet_03"){
                     cardView = Instantiate(cardPrefabs[2], cardContainer).GetComponent<CardView>();
+                }
+                else{
+                    cardView = Instantiate(cardPrefabs[0], cardContainer).GetComponent<CardView>();
                 }
                 cardView.Init(null, GameDataManager.CardData[data.CardID], data);
                 cardView.GetComponent<CardDrag>().Init(GameDataManager.CardData[data.CardID].Draggable);

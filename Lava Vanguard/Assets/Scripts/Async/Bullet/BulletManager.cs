@@ -25,6 +25,9 @@ namespace Async
                 case "Bullet_02":
                     GenerateBullet02();
                     break;
+                case "Bullet_03":
+                    GenerateBullet03();
+                    break;
                 default:
                     Debug.LogWarning("Unrecognized type: " + cardRankData.CardID);
                     break;
@@ -42,5 +45,12 @@ namespace Async
             Vector3 spawnPos = PlayerManager.Instance.playerView.transform.position;
             Instantiate(bulletPrefabs[1], spawnPos, Quaternion.identity, bulletContainer);
         }
+        // Generate Bullet_03
+        private void GenerateBullet03()
+        {
+            Vector3 spawnPos = PlayerManager.Instance.playerView.transform.position;
+            Instantiate(bulletPrefabs[2], spawnPos, Quaternion.identity, bulletContainer);
+        }
+    
     }
 }

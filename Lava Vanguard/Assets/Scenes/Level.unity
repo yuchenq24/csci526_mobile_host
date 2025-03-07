@@ -1599,6 +1599,7 @@ MonoBehaviour:
   bulletPrefabs:
   - {fileID: 7397666833938694871, guid: 118d987b0cf6c064980c2e550b2fa8d3, type: 3}
   - {fileID: 7397666833938694871, guid: 27325eb101c0eed4e94420a4baf4f889, type: 3}
+  - {fileID: 7397666833938694871, guid: d9b706d749baaf54d9990e8c2925be95, type: 3}
 --- !u!1 &835831352
 GameObject:
   m_ObjectHideFlags: 0

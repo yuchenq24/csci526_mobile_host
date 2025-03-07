@@ -38,7 +38,7 @@
         "ID": "Bullet_03",
         "Background": "Background_Normal",
         "Outline": "Outline_Normal",
-        "Content": "Content_01",
+        "Content": "Content_03",
         "Draggable": true
     }
 }

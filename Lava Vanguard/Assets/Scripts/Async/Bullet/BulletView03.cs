@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletView01 : BulletView
+public class BulletView03 : BulletView
 {
 
     [Header("Auto-Aiming")]
-    protected float maxAimDeviation = 5f;   
-    private float detectionRange = 5.0f;
-    private float selfDetectionRange = 5.0f;
+    protected float maxAimDeviation = 5f;
+    private float selfDetectionRange = 15.0f;   
+
     protected override void SetupBullet()
     {
         speed = 10f;
@@ -33,9 +33,9 @@ public class BulletView01 : BulletView
 
                 Vector3 targetPosition = enemy.transform.position;
                 float timeToHit = Vector3.Distance(transform.position, targetPosition) / speed;
-                // Vector3 predictedPosition = targetPosition + targetVelocity * timeToHit;
+                Vector3 predictedPosition = targetPosition + targetVelocity * timeToHit;
 
-                float distance = Vector3.Distance(targetPosition, transform.position);
+                float distance = Vector3.Distance(predictedPosition, transform.position);
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
