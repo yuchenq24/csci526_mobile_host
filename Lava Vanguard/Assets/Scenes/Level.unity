@@ -2553,13 +2553,13 @@ MonoBehaviour:
   grounds: []
   cameraDistance: 5
   yGap: 1.5
-  minPlatformsPerRow: 1
+  minPlatformsPerRow: 2
   maxPlatformsPerRow: 4
   minPlatformLength: 2
   maxPlatformLength: 5
-  maxHorizontalJump: 6
-  xMin: -12
-  xMax: 12
+  maxHorizontalJump: 2.5
+  xMin: -15
+  xMax: 15
 --- !u!4 &990588613
 Transform:
   m_ObjectHideFlags: 0
