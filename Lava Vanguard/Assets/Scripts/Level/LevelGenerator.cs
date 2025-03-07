@@ -158,7 +158,6 @@ public class LevelGenerator : MonoBehaviour
 
     void GetReachablePlatforms(ref List<PlatformData> current) {
         var currentReachable = new List<int>();
-        Debug.Log(currentReachable.Count);
         if (PreviousReachable.Count == 0) {
             for (int i = 0; i < current.Count; i++) {
                 PreviousReachable.Add(i);
