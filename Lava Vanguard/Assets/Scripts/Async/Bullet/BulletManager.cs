@@ -7,25 +7,40 @@ namespace Async
     public class BulletManager : MonoBehaviour
     {
         public static BulletManager Instance {  get; private set; }
-        public GameObject bulletPrefab;
         public Transform bulletContainer;
+        public GameObject[] bulletPrefabs;
         private void Awake()
         {
             Instance = this;
         }
-        /// <summary>
-        /// Just temp code!!!!!!!!!!!!!!!!!! 
-        /// </summary>
-        /// <param name="cardRankData"></param>
+
+        // Generate bullet by sequence manager
         public void GenerateBullet(CardRankData cardRankData)
         {
-            if (cardRankData.CardID == "Card_01")
+            switch (cardRankData.CardID)
             {
-                var bulletView = Instantiate(bulletPrefab, PlayerManager.Instance.playerView.transform.position, Quaternion.identity, bulletContainer).GetComponent<BulletView>();  //ugly
-                var way = PlayerManager.Instance.playerView.transform.localScale.x; //ugly
-                bulletView.speed = 10;
+                case "Bullet_01":
+                    GenerateBullet01();
+                    break;
+                case "Bullet_02":
+                    GenerateBullet02();
+                    break;
+                default:
+                    Debug.LogWarning("Unrecognized type: " + cardRankData.CardID);
+                    break;
             }
-
+        }
+        // Generate Bullet_01
+        private void GenerateBullet01()
+        {
+            Vector3 spawnPos = PlayerManager.Instance.playerView.transform.position;
+            Instantiate(bulletPrefabs[0], spawnPos, Quaternion.identity, bulletContainer);
+        }
+        // Generate Bullet_02
+        private void GenerateBullet02()
+        {
+            Vector3 spawnPos = PlayerManager.Instance.playerView.transform.position;
+            Instantiate(bulletPrefabs[1], spawnPos, Quaternion.identity, bulletContainer);
         }
     }
 }

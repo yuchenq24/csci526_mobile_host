@@ -26,7 +26,22 @@ namespace Async
         public static CardRankData AsyncHead
         {
             get =>
-                new CardRankData(ID: "0", CardID: "Card_Async2", Level: 1);
+                new CardRankData(ID: "0", CardID: "Card_Async", Level: 1);
+        }
+        public static CardRankData Bullet01
+        {
+            get =>
+                new CardRankData(ID: "0", CardID: "Bullet_01", Level: 1);
+        }
+        public static CardRankData Bullet02
+        {
+            get =>
+                new CardRankData(ID: "0", CardID: "Bullet_02", Level: 1);
+        }
+        public static CardRankData Bullet03
+        {
+            get =>
+                new CardRankData(ID: "0", CardID: "Bullet_03", Level: 1);
         }
         public static CardRankData Empty
         {

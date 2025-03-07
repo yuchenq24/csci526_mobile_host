@@ -108,12 +108,14 @@ namespace Async
                                 {
                                     var newLinkedSequence = SequenceManager.Instance.GetNextLinkedSequenceID();
                                     cardView.cardRankData.LinkedSequenceID = newLinkedSequence;
+                                    
                                     SequenceManager.Instance.GenerateAsyncSequence(slot.rectTransform.anchoredPosition, newLinkedSequence, cardView.cardRankData.Level);
                                     sequence.Value.AddCardView(cardView, slot);
                                 }
                             }
                             else
                             {
+                                Debug.Log("RankData " + cardView.cardRankData.ID + " " + cardView.cardRankData.CardID);
                                 sequence.Value.AddCardView(cardView, slot);
                             }
 
@@ -153,7 +155,6 @@ namespace Async
             cardView.slot = null;
             if (cardView.cardRankData.LinkedSequenceID != null && cardView.cardRankData.LinkedSequenceID != "Not_Ready") 
             {
-
                 var sequenceView = SequenceManager.Instance.sequenceViews[cardView.cardRankData.LinkedSequenceID];
                 cardView.cardRankData.LinkedSequenceID = "Not_Ready";
                 for (int i = 1; i < sequenceView.slots.Count; i++)

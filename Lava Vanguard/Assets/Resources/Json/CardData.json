@@ -20,8 +20,22 @@
         "Content": "Content_Empty",
         "Draggable": false
     },
-    "Card_01": {
-        "ID": "Card_01",
+    "Bullet_01": {
+        "ID": "Bullet_01",
+        "Background": "Background_Normal",
+        "Outline": "Outline_Normal",
+        "Content": "Content_01",
+        "Draggable": true
+    },
+    "Bullet_02": {
+        "ID": "Bullet_02",
+        "Background": "Background_Normal",
+        "Outline": "Outline_Normal",
+        "Content": "Content_02",
+        "Draggable": true
+    },
+    "Bullet_03": {
+        "ID": "Bullet_03",
         "Background": "Background_Normal",
         "Outline": "Outline_Normal",
         "Content": "Content_01",

@@ -1595,8 +1595,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02d77726166a2e4bbebe7eab54b7739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7397666833938694871, guid: 118d987b0cf6c064980c2e550b2fa8d3, type: 3}
   bulletContainer: {fileID: 927322169}
+  bulletPrefabs:
+  - {fileID: 7397666833938694871, guid: 118d987b0cf6c064980c2e550b2fa8d3, type: 3}
+  - {fileID: 7397666833938694871, guid: 27325eb101c0eed4e94420a4baf4f889, type: 3}
 --- !u!1 &835831352
 GameObject:
   m_ObjectHideFlags: 0
@@ -2446,7 +2448,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 927322169}
-  - component: {fileID: 927322170}
   m_Layer: 0
   m_Name: BulletContainer
   m_TagString: Untagged
@@ -2469,20 +2470,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &927322170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927322168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f02d77726166a2e4bbebe7eab54b7739, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7397666833938694871, guid: 118d987b0cf6c064980c2e550b2fa8d3, type: 3}
-  bulletContainer: {fileID: 927322169}
 --- !u!1 &972391807
 GameObject:
   m_ObjectHideFlags: 0
@@ -4244,7 +4231,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7482667652216324306, guid: 76cd5857881b02b4181c94ba18af0d49, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 0eb6476d945e1d04e83872b660cca54f, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4783,7 +4770,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7482667652216324306, guid: 76cd5857881b02b4181c94ba18af0d49, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 0eb6476d945e1d04e83872b660cca54f, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5499,9 +5486,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1888842051}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyContainer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

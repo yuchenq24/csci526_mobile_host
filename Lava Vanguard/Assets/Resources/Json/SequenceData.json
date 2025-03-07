@@ -4,7 +4,7 @@
         "CardDatas": [
             {
                 "ID": 0,
-                "CardID": "Card_01",
+                "CardID": "Bullet_01",
                 "Level": 1
             },
             {
@@ -14,7 +14,7 @@
             },
             {
                 "ID": 2,
-                "CardID": "Card_01",
+                "CardID": "Bullet_01",
                 "Level": 1
             },
             {
@@ -29,12 +29,12 @@
             },
             {
                 "ID": 5,
-                "CardID": "Card_Empty",
+                "CardID": "Bullet_02",
                 "Level": 1
             },
             {
                 "ID": 6,
-                "CardID": "Card_01",
+                "CardID": "Bullet_01",
                 "Level": 1
             },
             {

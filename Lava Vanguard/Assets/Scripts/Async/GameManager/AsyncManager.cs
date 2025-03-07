@@ -21,11 +21,14 @@ namespace Async
         {
             switch(cardIndex){
                 case 0:
-                InventoryManager.Instance.inventoryView.AddCardView(new CardRankData("000", "Card_01", 1));
+                InventoryManager.Instance.inventoryView.AddCardView(CardRankData.Bullet01);
                 break;
                 case 1:
-                InventoryManager.Instance.inventoryView.AddCardView(CardRankData.AsyncHead);
+                    InventoryManager.Instance.inventoryView.AddCardView(CardRankData.Bullet02);
                 break;
+                case 2:
+                    InventoryManager.Instance.inventoryView.AddCardView(CardRankData.Bullet03);
+                    break;
             }
         }
     }
