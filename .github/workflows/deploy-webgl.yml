@@ -1,0 +1,32 @@
+name: Deploy WebGL to GitHub Pages
+
+on:
+  push:
+    branches:
+      - mobile_host
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Move WebGL Build to /mobile/
+        run: |
+          mkdir -p public/mobile
+          mv * public/mobile || true
+
+      - name: Upload WebGL Build
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
