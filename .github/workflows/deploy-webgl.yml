@@ -13,22 +13,8 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Move WebGL Build to /mobile/
-        run: |
-          mkdir -p public/mobile
-          mv * public/mobile || true
-
-      - name: Upload WebGL Build
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
-
+      
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
